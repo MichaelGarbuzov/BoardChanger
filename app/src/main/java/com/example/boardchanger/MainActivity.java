@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-// Daniel test
     private static final int SPLASH = 3300;
 
     Animation topAnim,bottomAnim;

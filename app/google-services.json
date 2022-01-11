@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "303287384835",
+    "project_id": "boardchanger-b2965",
+    "storage_bucket": "boardchanger-b2965.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303287384835:android:12719ea6bd2c49424e8736",
+        "android_client_info": {
+          "package_name": "com.example.boardchanger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303287384835-cr7i8ti23i7uieg0pmj16426e58t0thh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKyEF9mNd9roDYn6RUAesN51Ir9wrLtvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303287384835-cr7i8ti23i7uieg0pmj16426e58t0thh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
