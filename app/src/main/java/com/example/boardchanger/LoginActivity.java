@@ -32,14 +32,28 @@ public class LoginActivity extends AppCompatActivity {
         loginEmail = findViewById(R.id.loginEmail);
         loginPwd = findViewById(R.id.loginPassword);
         loginBtn = findViewById(R.id.loginButton);
-        loginQn = findViewById(R.id.loginPageQuestion);
+        loginQn = (TextView) findViewById(R.id.loginPageQuestion);
+
+        loginBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                openMainFeed();
+            }
+        }
+        );
 
         loginQn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-                startActivity(intent);
+                Intent register = new Intent(LoginActivity.this, RegistrationActivity.class);
+                startActivity(register);
             }
         });
+    }
+
+    private void openMainFeed() {
+        Intent feed = new Intent(LoginActivity.this, MainFeedActivity.class);
+        startActivity(feed);
+        finish();
     }
 }

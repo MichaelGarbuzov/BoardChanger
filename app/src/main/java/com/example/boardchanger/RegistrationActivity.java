@@ -26,7 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_registration);
 
-        toolbar = findViewById(R.id.loginToolbar);
+        toolbar = findViewById(R.id.RegistrationToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Registration");
 
@@ -38,8 +38,9 @@ public class RegistrationActivity extends AppCompatActivity {
         regQn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                startActivity(intent);
+                Intent login = new Intent(RegistrationActivity.this, LoginActivity.class);
+                startActivity(login);
+                finish();
             }
         });
 

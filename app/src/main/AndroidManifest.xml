@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BoardChanger">
         <activity
+            android:name=".MainFeedActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistrationActivity"
             android:exported="false" />
         <activity
