@@ -25,4 +25,9 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/boardDetailsFragment"
+        android:name="com.example.boardchanger.BoardDetailsFragment"
+        android:label="fragment_board_details"
+        tools:layout="@layout/fragment_board_details" />
 </navigation>

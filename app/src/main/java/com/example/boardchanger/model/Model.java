@@ -7,16 +7,27 @@ public class Model {
     public final static Model instance = new Model();
 
     private Model(){
-
-        Board board = new Board();
-        board.name = "Kali" ;
-        board.price = "100$";
-        board.year = "2018";
-        data.add(board);
+        for(int i=0;i<20;i++){
+            Board b = new Board("180$"+i,"mic"+i,"1922"+i);
+            data.add(b);
+        }
     }
     List<Board> data = new LinkedList<Board>();
 
     public List<Board> getAllBoards() {
         return data;
+    }
+
+    public Board getBoardByName(String boardName){
+        for (Board board:data){
+            if(board.getName().equals(boardName)){
+                return board;
+            }
+        }
+        return null;
+    }
+
+    public void addBoard(Board board){
+        data.add(board);
     }
 }

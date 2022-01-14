@@ -44,5 +44,14 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        regBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
+                startActivity(feed);
+                finish();
+            }
+        });
+
     }
 }
