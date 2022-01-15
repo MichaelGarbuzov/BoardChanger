@@ -39,14 +39,16 @@ public class MainFeedActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (!super.onOptionsItemSelected(item)){
-            switch(item.getItemId()){
+        if (!super.onOptionsItemSelected(item)) {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    navCtl.navigateUp();
+                    return true;
                 case R.id.menu_profile:
                     navCtl.navigate(R.id.action_global_profileFragment);
-                    break;
+                    return true;
             }
         }
-        else return true;
         return true;
-        }
+    }
 }

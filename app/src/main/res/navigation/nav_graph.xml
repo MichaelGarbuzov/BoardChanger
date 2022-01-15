@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/boardDetailsFragment"
         android:name="com.example.boardchanger.BoardDetailsFragment"
-        android:label="fragment_board_details"
-        tools:layout="@layout/fragment_board_details" >
+        android:label="Board Details"
+        tools:layout="@layout/fragment_board_details">
         <argument
             android:name="boardName"
             app:argType="string" />
@@ -20,8 +20,8 @@
     <fragment
         android:id="@+id/boardsListFragment"
         android:name="com.example.boardchanger.BoardsListFragment"
-        android:label="fragment_boards_list"
-        tools:layout="@layout/fragment_boards_list" >
+        android:label="All Boards"
+        tools:layout="@layout/fragment_boards_list">
         <action
             android:id="@+id/action_boardsListFragment_to_boardDetailsFragment"
             app:destination="@id/boardDetailsFragment" />
@@ -32,17 +32,17 @@
     <fragment
         android:id="@+id/addBoardFragment"
         android:name="com.example.boardchanger.AddBoardFragment"
-        android:label="fragment_add_board"
+        android:label="Add Board"
         tools:layout="@layout/fragment_add_board" />
     <fragment
         android:id="@+id/sendMessageFragment"
         android:name="com.example.boardchanger.SendMessageFragment"
-        android:label="fragment_send_message"
+        android:label="Send Message"
         tools:layout="@layout/fragment_send_message" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/menu_profile"
         android:name="com.example.boardchanger.profileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
-    <action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment" />
+    <action android:id="@+id/action_global_profileFragment" app:destination="@id/menu_profile" />
 </navigation>
