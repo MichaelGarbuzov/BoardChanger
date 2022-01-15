@@ -1,5 +1,6 @@
 package com.example.boardchanger;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -9,6 +10,8 @@ import androidx.navigation.ui.NavigationUI;
 
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
 public class MainFeedActivity extends AppCompatActivity {
@@ -26,4 +29,24 @@ public class MainFeedActivity extends AppCompatActivity {
 
             NavigationUI.setupActionBarWithNavController(this, navCtl);
         }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (!super.onOptionsItemSelected(item)){
+            switch(item.getItemId()){
+                case R.id.menu_profile:
+                    navCtl.navigate(R.id.action_global_profileFragment);
+                    break;
+            }
+        }
+        else return true;
+        return true;
+        }
+}
