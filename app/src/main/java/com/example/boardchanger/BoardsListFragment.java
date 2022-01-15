@@ -4,17 +4,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.boardchanger.model.Board;
 import com.example.boardchanger.model.Model;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -42,15 +46,16 @@ public class BoardsListFragment extends Fragment {
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(View v, int position) {
                 String boardName = data.get(position).getName();
-                BoardDetailsFragment frag =  BoardDetailsFragment.newInstance(boardName);
-                FragmentTransaction tran = getParentFragmentManager().beginTransaction();
-                tran.add(R.id.mainfeed_frag_container,frag);
-                tran.addToBackStack("");
-                tran.commit();
+                Navigation.findNavController(v).navigate(
+                        BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardName));
             }
         });
+        ImageButton add = view.findViewById(R.id.boards_add_btn);
+        add.setOnClickListener(Navigation.createNavigateOnClickListener(
+                BoardsListFragmentDirections.actionBoardsListFragmentToAddBoardFragment()));
+
         return view;
     }
 
@@ -72,14 +77,14 @@ public class BoardsListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    listener.onItemClick(pos);
+                    listener.onItemClick(v, pos);
                 }
             });
         }
     }
 
     interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(View v, int position);
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {

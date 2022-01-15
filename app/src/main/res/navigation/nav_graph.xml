@@ -3,31 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/boardsListFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.boardchanger.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.boardchanger.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second" >
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
     <fragment
         android:id="@+id/boardDetailsFragment"
         android:name="com.example.boardchanger.BoardDetailsFragment"
         android:label="fragment_board_details"
-        tools:layout="@layout/fragment_board_details" />
+        tools:layout="@layout/fragment_board_details" >
+        <argument
+            android:name="boardName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_boardDetailsFragment_to_sendMessageFragment"
+            app:destination="@id/sendMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardsListFragment"
+        android:name="com.example.boardchanger.BoardsListFragment"
+        android:label="fragment_boards_list"
+        tools:layout="@layout/fragment_boards_list" >
+        <action
+            android:id="@+id/action_boardsListFragment_to_boardDetailsFragment"
+            app:destination="@id/boardDetailsFragment" />
+        <action
+            android:id="@+id/action_boardsListFragment_to_addBoardFragment"
+            app:destination="@id/addBoardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBoardFragment"
+        android:name="com.example.boardchanger.AddBoardFragment"
+        android:label="fragment_add_board"
+        tools:layout="@layout/fragment_add_board" />
+    <fragment
+        android:id="@+id/sendMessageFragment"
+        android:name="com.example.boardchanger.SendMessageFragment"
+        android:label="fragment_send_message"
+        tools:layout="@layout/fragment_send_message" />
 </navigation>

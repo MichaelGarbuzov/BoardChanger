@@ -3,10 +3,12 @@ package com.example.boardchanger;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,39 +21,14 @@ import com.example.boardchanger.model.Model;
  * create an instance of this fragment.
  */
 public class BoardDetailsFragment extends Fragment {
-    private static final String ARG_BOARD_NAME = "ARG_BOARD_NAME";
-
-    String boardName;
-    String boardPrice;
-    String boardYear;
-    String boardDesc;
-    ImageView boardImage;
-
-    public BoardDetailsFragment() {
-    }
-
-    public static BoardDetailsFragment newInstance(String studentId) {
-        BoardDetailsFragment fragment = new BoardDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_BOARD_NAME, fragment.boardName );
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            boardName = getArguments().getString(ARG_BOARD_NAME);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_board_details, container, false);
-        Board board = Model.instance.getBoardByName(boardName);
+        String boardNameData = BoardDetailsFragmentArgs.fromBundle(getArguments()).getBoardName();
+        Board board = Model.instance.getBoardByName(boardNameData);
 
         TextView boardName = view.findViewById(R.id.board_details_name);
         TextView boardYear = view.findViewById(R.id.board_details_year);
@@ -63,6 +40,16 @@ public class BoardDetailsFragment extends Fragment {
         boardYear.setText(board.getYear());
         boardPrice.setText(board.getPrice());
         boardDesc.setText(board.getDescription());
+
+        Button backBtn = view.findViewById(R.id.board_details_back_btn);
+        backBtn.setOnClickListener((v)->{
+            Navigation.findNavController(v).navigateUp();
+
+        });
+
+        Button sendMsg = view.findViewById(R.id.board_details_sendmessage_btn);
+        sendMsg.setOnClickListener(Navigation.createNavigateOnClickListener(
+                BoardDetailsFragmentDirections.actionBoardDetailsFragmentToSendMessageFragment()));
         return view;
     }
 }
