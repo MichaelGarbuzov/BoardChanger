@@ -2,17 +2,25 @@ package com.example.boardchanger;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.boardchanger.model.Board;
@@ -25,23 +33,29 @@ import java.util.List;
 public class BoardsListFragment extends Fragment {
 
     List<Board> data;
+    MyAdapter adapter;
+    SwipeRefreshLayout swipeRefresh;
 
     public BoardsListFragment() {
-        // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_boards_list, container, false);
-        data = Model.instance.getAllBoards();
+        swipeRefresh = view.findViewById(R.id.boards_list_swipe_refresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
         RecyclerView boardsList = view.findViewById(R.id.boards_list_rv);
         boardsList.setHasFixedSize(true);
-
         boardsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        MyAdapter adapter = new MyAdapter();
+        adapter = new MyAdapter();
         boardsList.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
@@ -56,7 +70,19 @@ public class BoardsListFragment extends Fragment {
         add.setOnClickListener(Navigation.createNavigateOnClickListener(
                 BoardsListFragmentDirections.actionBoardsListFragmentToAddBoardFragment()));
 
+        //setHasOptionsMenu(true);
+        refresh();
+
         return view;
+    }
+
+    private void refresh() {
+        swipeRefresh.setRefreshing(true);
+        Model.instance.getAllBoards((boardsList)->{
+            data = boardsList;
+            adapter.notifyDataSetChanged();
+            swipeRefresh.setRefreshing(false);
+        });
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -95,14 +121,14 @@ public class BoardsListFragment extends Fragment {
         }
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = getLayoutInflater().inflate(R.layout.list_row, parent, false);
             MyViewHolder holder = new MyViewHolder(view, listener);
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             Board board = data.get(position);
             holder.boardName.setText(board.getName());
             holder.boardYear.setText(board.getYear());
@@ -110,7 +136,23 @@ public class BoardsListFragment extends Fragment {
         }
         @Override
         public int getItemCount() {
+            if(data == null){
+                return 0;
+            }
             return data.size();
         }
     }
+/*    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.board_list_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == R.id.addBoardFragment){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }*/
 }

@@ -6,5 +6,10 @@
         android:id="@+id/menu_profile"
         android:icon="?android:attr/fingerprintAuthDrawable"
         android:title="Profile"
-        app:showAsAction="always" />
+        app:showAsAction="never|ifRoom" />
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="?attr/actionModeCloseDrawable"
+        android:title="Logout"
+        app:showAsAction="ifRoom" />
 </menu>

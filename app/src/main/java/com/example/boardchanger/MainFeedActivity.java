@@ -47,6 +47,8 @@ public class MainFeedActivity extends AppCompatActivity {
                 case R.id.menu_profile:
                     navCtl.navigate(R.id.action_global_profileFragment);
                     return true;
+                case R.id.menu_logout:
+                    return true;
             }
         }
         return true;

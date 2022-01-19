@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
 
     <TextView
         android:id="@+id/listrow_board_price"
@@ -12,7 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        android:text="TextView"
+        android:text="Price"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/listrow_image_v"
         app:layout_constraintHorizontal_bias="1.0"
@@ -24,10 +25,9 @@
         android:layout_width="118dp"
         android:layout_height="128dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listrow_board_name"
+        app:layout_constraintTop_toTopOf="@+id/listrow_board_name"
         app:layout_constraintVertical_bias="1.0"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -36,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="TextView"
+        android:text="Name"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/listrow_image_v"
         app:layout_constraintStart_toStartOf="@+id/listrow_board_year"
@@ -49,9 +49,18 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:text="TextView"
+        android:text="Year"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/listrow_image_v"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listrow_board_name" />
+
+    <View
+        android:id="@+id/list_row_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:divider="#FFF"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/listrow_image_v" />
 </androidx.constraintlayout.widget.ConstraintLayout>
