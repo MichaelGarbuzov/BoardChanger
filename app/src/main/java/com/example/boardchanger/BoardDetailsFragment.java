@@ -27,6 +27,7 @@ public class BoardDetailsFragment extends Fragment {
     TextView boardYear;
     TextView boardPrice;
     TextView boardDesc;
+    TextView address;
     ImageView boardImage;
 
     @Override
@@ -42,6 +43,7 @@ public class BoardDetailsFragment extends Fragment {
                 boardYear.setText(board.getYear());
                 boardPrice.setText(board.getPrice());
                 boardDesc.setText(board.getDescription());
+                address.setText(board.getAddress());
             }
         });
 
@@ -49,6 +51,7 @@ public class BoardDetailsFragment extends Fragment {
          boardYear = view.findViewById(R.id.board_details_year);
          boardPrice = view.findViewById(R.id.board_details_price);
          boardDesc = view.findViewById(R.id.board_details_desc);
+         address = view.findViewById(R.id.board_details_address);
          boardImage = view.findViewById(R.id.board_details_image);
 
 

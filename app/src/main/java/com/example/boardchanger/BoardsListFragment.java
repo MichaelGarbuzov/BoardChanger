@@ -88,7 +88,6 @@ public class BoardsListFragment extends Fragment {
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView boardName;
         TextView boardPrice;
-        TextView boardDesc;
         TextView boardYear;
         ImageView boardImage;
 
