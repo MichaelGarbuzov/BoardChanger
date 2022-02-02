@@ -1,11 +1,14 @@
 package com.example.boardchanger;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,8 +34,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 public class BoardsListFragment extends Fragment {
-
-    List<Board> data;
+    BoardsListViewModel viewModel;
     MyAdapter adapter;
     SwipeRefreshLayout swipeRefresh;
 
@@ -40,17 +42,20 @@ public class BoardsListFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        viewModel = new ViewModelProvider(this).get(BoardsListViewModel.class);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_boards_list, container, false);
+
         swipeRefresh = view.findViewById(R.id.boards_list_swipe_refresh);
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh();
-            }
-        });
+        swipeRefresh.setOnRefreshListener(() -> refresh());
+
         RecyclerView boardsList = view.findViewById(R.id.boards_list_rv);
         boardsList.setHasFixedSize(true);
         boardsList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -58,32 +63,33 @@ public class BoardsListFragment extends Fragment {
         adapter = new MyAdapter();
         boardsList.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                String boardName = data.get(position).getName();
-                Navigation.findNavController(v).navigate(
-                        BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardName));
-            }
+        adapter.setOnItemClickListener((v, position) -> {
+            String boardName = viewModel.getData().getValue().get(position).getName();
+            Navigation.findNavController(v).navigate(
+                    BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardName));
         });
         ImageButton add = view.findViewById(R.id.boards_add_btn);
         add.setOnClickListener(Navigation.createNavigateOnClickListener(
                 BoardsListFragmentDirections.actionBoardsListFragmentToAddBoardFragment()));
 
-        //setHasOptionsMenu(true);
-        refresh();
-
+        viewModel.getData().observe(getViewLifecycleOwner(), boardList -> refresh());
+        swipeRefresh.setRefreshing(Model.instance.getBoardListLoadingState().getValue() ==
+                Model.BoardListLoadingState.loading);
+        Model.instance.getBoardListLoadingState().observe(getViewLifecycleOwner(), boardListLoadingState -> {
+            if (boardListLoadingState == Model.BoardListLoadingState.loading) {
+                swipeRefresh.setRefreshing(true);
+            } else {
+                swipeRefresh.setRefreshing(false);
+            }
+        });
         return view;
     }
 
     private void refresh() {
-        swipeRefresh.setRefreshing(true);
-        Model.instance.getAllBoards((boardsList)->{
-            data = boardsList;
-            adapter.notifyDataSetChanged();
-            swipeRefresh.setRefreshing(false);
-        });
+        adapter.notifyDataSetChanged();
+        swipeRefresh.setRefreshing(false);
     }
+
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView boardName;
@@ -128,30 +134,18 @@ public class BoardsListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            Board board = data.get(position);
+            Board board = viewModel.getData().getValue().get(position);
             holder.boardName.setText(board.getName());
             holder.boardYear.setText(board.getYear());
             holder.boardPrice.setText(board.getPrice());
         }
+
         @Override
         public int getItemCount() {
-            if(data == null){
+            if (viewModel.getData().getValue() == null) {
                 return 0;
             }
-            return data.size();
+            return viewModel.getData().getValue().size();
         }
     }
-/*    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.board_list_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (item.getItemId() == R.id.addBoardFragment){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }

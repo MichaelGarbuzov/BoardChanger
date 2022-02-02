@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +49,9 @@ public class MainFeedActivity extends AppCompatActivity {
                     navCtl.navigate(R.id.action_global_profileFragment);
                     return true;
                 case R.id.menu_logout:
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                     return true;
             }
         }

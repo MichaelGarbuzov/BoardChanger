@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +23,9 @@ public class Board {
 //   ImageView image;
     String year="";
     String address="";
+    Long updateDate = new Long(0);
 
-   public Board() {}
+    public Board() {}
 
     public Board(String name, String year, String price, String description,String address) {
         this.name = name;
@@ -38,7 +42,11 @@ public class Board {
        String price = (String) json.get("price");
        String description = (String) json.get("description");
        String address = (String) json.get("address");
+       Timestamp ts = (Timestamp)json.get("updateDate");
+       Long updateDate = ts.getSeconds();
+
        Board board = new Board(name, year, price, description, address);
+       board.setUpdateDate(updateDate);
        return board;
     }
 
@@ -94,7 +102,14 @@ public class Board {
         json.put("price", price);
         json.put("description", description);
         json.put("address", address);
+        json.put("updateDate", FieldValue.serverTimestamp());
         return json;
+    }
+    public void setUpdateDate(Long updateDate){
+        this.updateDate = updateDate;
+    }
+    public Long getUpdateDate() {
+        return updateDate;
     }
 
  /*   public ImageView getImage() {
