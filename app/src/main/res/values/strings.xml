@@ -11,4 +11,31 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description">Description</string>
+    <string name="year_LR">Year</string>
+    <string name="name_LR">Name</string>
+    <string name="price_LR">Price</string>
+    <string name="add_new_board">Add New Board</string>
+    <string name="model_AB">Model</string>
+    <string name="year_AB">Year</string>
+    <string name="asking_price_AB">Asking Price</string>
+    <string name="address_AB">Address</string>
+    <string name="description_AB">Description</string>
+    <string name="description_BD">Description</string>
+    <string name="name_BD">Name</string>
+    <string name="year_BD">Year</string>
+    <string name="price_BD">Price</string>
+    <string name="send_message_BD">Send Message</string>
+    <string name="address_BD">Address</string>
+    <string name="message_title_SM">Message Title:</string>
+    <string name="message_body_SM">Message Body:</string>
+    <string name="send_SM">Send</string>
+    <string name="enter_email_REG">Enter Email</string>
+    <string name="enter_password_REG">Enter Password</string>
+    <string name="register_REG">Register</string>
+    <string name="already_have_an_account_login_REG">already have an account? Login</string>
+    <string name="enter_email_LOGIN">Enter Email</string>
+    <string name="enter_password_LOGIN">Enter Password</string>
+    <string name="login_LOGIN">Login</string>
+    <string name="don_t_have_an_account_register_LOGIN">Don\'t have an account? Register</string>
 </resources>

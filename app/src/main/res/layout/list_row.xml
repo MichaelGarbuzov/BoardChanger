@@ -7,6 +7,7 @@
     android:layout_margin="8dp"
     android:layout_marginBottom="20dp"
     android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/colorPrimaryDark"
     app:cardCornerRadius="10dp"
     app:cardElevation="16dp"
     app:cardPreventCornerOverlap="true">
@@ -14,6 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="8dp"
         android:layout_margin="4dp">
 
 
@@ -24,7 +27,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="15dp"
-            android:text="Price"
+            android:text="@string/price_LR"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/listrow_image_v"
             app:layout_constraintHorizontal_bias="1.0"
@@ -36,6 +39,7 @@
             android:layout_width="118dp"
             android:layout_height="128dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/listrow_board_name"
@@ -47,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:text="Name"
+            android:text="@string/name_LR"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/listrow_image_v"
             app:layout_constraintStart_toStartOf="@+id/listrow_board_year"
@@ -60,7 +64,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
-            android:text="Year"
+            android:text="@string/year_LR"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/listrow_image_v"
             app:layout_constraintStart_toStartOf="parent"

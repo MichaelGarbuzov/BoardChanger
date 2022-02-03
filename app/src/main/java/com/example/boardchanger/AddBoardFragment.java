@@ -127,23 +127,24 @@ public class AddBoardFragment extends Fragment {
 
     }
 
-    private void add(){
+    private void add() {
         progressBar.setVisibility(View.VISIBLE);
-        if (boardYear.getText().toString().equals("")||boardDesc.getText().toString().equals("")||
-                boardName.getText().toString().equals("")||boardPrice.getText().toString().equals("")||
-                boardAddress.getText().toString().equals("")){
-            Toast.makeText(getActivity(),"All Fields Must be Filled!",Toast.LENGTH_LONG).show();
+        addBoard.setEnabled(false);
+        if (boardYear.getText().toString().equals("") || boardDesc.getText().toString().equals("") ||
+                boardName.getText().toString().equals("") || boardPrice.getText().toString().equals("") ||
+                boardAddress.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), "All Fields Must be Filled!", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
-                    return;
-        }
-
-        if(imageBitmap == null) {
-            Toast.makeText(getActivity(), "You Must Add A Board Image!", Toast.LENGTH_LONG).show();
-            progressBar.setVisibility(View.GONE);
+            addBoard.setEnabled(true);
             return;
         }
 
-        addBoard.setEnabled(false);
+        if (imageBitmap == null) {
+            Toast.makeText(getActivity(), "You Must Add A Board Image!", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
+            addBoard.setEnabled(true);
+            return;
+        }
         camBtn.setEnabled(false);
         galleryBtn.setEnabled(false);
 
@@ -152,12 +153,12 @@ public class AddBoardFragment extends Fragment {
         String desc = boardDesc.getText().toString();
         String year = boardYear.getText().toString();
         String address = boardAddress.getText().toString();
-        Board board = new Board(name,year,price, desc, address);
+        Board board = new Board(name, year, price, desc, address);
         Model.instance.saveImage(imageBitmap, name + ".jpg", url -> {
-                board.setImageUrl(url);
-                });
-        Model.instance.addBoard(board,()->{
-            Navigation.findNavController(boardName).navigateUp();
+            board.setImageUrl(url);
+            Model.instance.addBoard(board, () -> {
+                Navigation.findNavController(boardName).navigateUp();
+            });
         });
     }
 }

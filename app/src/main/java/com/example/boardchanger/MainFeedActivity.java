@@ -23,6 +23,11 @@ public class MainFeedActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main_feed);
+        /*    if(savedInstanceState == null){
+                Intent firstLoginIntent = new Intent(this, LoginActivity.class);
+                startActivity(firstLoginIntent);
+                finish();
+            }*/
             toolbar = findViewById(R.id.mainfeed_toolbar);
             setSupportActionBar(toolbar);
             NavHost navHost = (NavHost) getSupportFragmentManager().findFragmentById(R.id.mainfeed_navhost);

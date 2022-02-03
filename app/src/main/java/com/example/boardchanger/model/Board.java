@@ -17,6 +17,7 @@ public class Board {
     final public static String COLLECTION_NAME = "boards";
     @PrimaryKey
     @NonNull
+    //String usersEmail;
     String name="";
     String price="";
     String description="";
@@ -24,6 +25,15 @@ public class Board {
     String address="";
     String imageUrl;
     Long updateDate = new Long(0);
+
+
+   /* public String getUser() {
+        return usersEmail;
+    }
+
+    public void setUser(String user) {
+        this.usersEmail = user;
+    }*/
 
     public Board() {}
 
@@ -111,7 +121,7 @@ public class Board {
     }
 
     public void setImageUrl(String url) {
-        this.imageUrl = url;
+        imageUrl = url;
 
     }
     public String getImageUrl() {

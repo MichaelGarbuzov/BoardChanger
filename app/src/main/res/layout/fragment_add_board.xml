@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:text="Add New Board"
+        android:text="@string/add_new_board"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -52,7 +52,7 @@
             android:id="@+id/add_board_model"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Model" />
+            android:hint="@string/model_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -70,7 +70,7 @@
             android:id="@+id/add_board_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Year" />
+            android:hint="@string/year_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -88,7 +88,7 @@
             android:id="@+id/add_board_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Asking Price" />
+            android:hint="@string/asking_price_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -106,7 +106,7 @@
             android:id="@+id/add_board_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address" />
+            android:hint="@string/address_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -123,7 +123,7 @@
             android:id="@+id/add_board_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description" />
+            android:hint="@string/description_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton

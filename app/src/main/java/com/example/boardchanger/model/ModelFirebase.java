@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,7 +42,8 @@ public class ModelFirebase {
     }
 
     public void getAllBoards(Long lastUpdateDate, GetAllBoardsListener listener) {
-        db.collection(Board.COLLECTION_NAME).get().addOnCompleteListener(task -> {
+        db.collection(Board.COLLECTION_NAME)
+                .get().addOnCompleteListener(task -> {
             List<Board> list = new LinkedList<Board>();
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
