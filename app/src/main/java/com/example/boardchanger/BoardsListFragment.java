@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.example.boardchanger.model.Board;
 import com.example.boardchanger.model.Model;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -54,7 +55,7 @@ public class BoardsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_boards_list, container, false);
 
         swipeRefresh = view.findViewById(R.id.boards_list_swipe_refresh);
-        swipeRefresh.setOnRefreshListener(() -> refresh());
+        swipeRefresh.setOnRefreshListener(() -> Model.instance.refreshBoardsList());
 
         RecyclerView boardsList = view.findViewById(R.id.boards_list_rv);
         boardsList.setHasFixedSize(true);
@@ -112,6 +113,14 @@ public class BoardsListFragment extends Fragment {
                 }
             });
         }
+
+        public void bind(Board board) {
+            boardName.setText(board.getName());
+            boardYear.setText(board.getYear());
+            boardPrice.setText(board.getPrice());
+            boardImage.setImageResource(R.drawable.board);
+            Picasso.get().load(board.getImageUrl()).into(boardImage);
+        }
     }
 
     interface OnItemClickListener {
@@ -135,9 +144,7 @@ public class BoardsListFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             Board board = viewModel.getData().getValue().get(position);
-            holder.boardName.setText(board.getName());
-            holder.boardYear.setText(board.getYear());
-            holder.boardPrice.setText(board.getPrice());
+            holder.bind(board);
         }
 
         @Override

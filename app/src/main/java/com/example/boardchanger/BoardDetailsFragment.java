@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.boardchanger.model.Board;
 import com.example.boardchanger.model.Model;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +45,7 @@ public class BoardDetailsFragment extends Fragment {
                 boardPrice.setText(board.getPrice());
                 boardDesc.setText(board.getDescription());
                 address.setText(board.getAddress());
+                Picasso.get().load(board.getImageUrl()).into(boardImage);
             }
         });
 

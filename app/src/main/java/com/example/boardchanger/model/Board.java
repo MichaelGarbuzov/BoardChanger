@@ -20,9 +20,9 @@ public class Board {
     String name="";
     String price="";
     String description="";
-//   ImageView image;
     String year="";
     String address="";
+    String imageUrl;
     Long updateDate = new Long(0);
 
     public Board() {}
@@ -33,7 +33,6 @@ public class Board {
         this.price = price;
        this.description = description;
        this.address = address;
-        //this.image = image;
     }
 
     public static Board create(Map<String, Object> json) {
@@ -44,9 +43,10 @@ public class Board {
        String address = (String) json.get("address");
        Timestamp ts = (Timestamp)json.get("updateDate");
        Long updateDate = ts.getSeconds();
-
+       String imageUrl = (String)json.get("imageUrl");
        Board board = new Board(name, year, price, description, address);
        board.setUpdateDate(updateDate);
+       board.setImageUrl(imageUrl);
        return board;
     }
 
@@ -75,9 +75,6 @@ public class Board {
         this.description = description;
   }
 
-  /* public void setImage(ImageView image) {
-      this.image = image;
-    }*/
 
     public String getName() {
         return name;
@@ -103,6 +100,7 @@ public class Board {
         json.put("description", description);
         json.put("address", address);
         json.put("updateDate", FieldValue.serverTimestamp());
+        json.put("imageUrl", imageUrl);
         return json;
     }
     public void setUpdateDate(Long updateDate){
@@ -112,8 +110,12 @@ public class Board {
         return updateDate;
     }
 
- /*   public ImageView getImage() {
-        return image;
-    }*/
+    public void setImageUrl(String url) {
+        this.imageUrl = url;
+
+    }
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
 }

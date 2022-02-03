@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.boardchanger.MyApplication;
 
-@Database(entities = {Board.class}, version = 3)
+@Database(entities = {Board.class}, version = 4)
 abstract class BoardChangerDBRepository extends RoomDatabase{
     public abstract BoardDao boardDao();
 }

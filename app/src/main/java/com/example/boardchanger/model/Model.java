@@ -2,6 +2,7 @@ package com.example.boardchanger.model;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -22,6 +23,12 @@ public class Model {
     Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
     ModelFirebase modelFirebase = new ModelFirebase();
     private Model(){
+    }
+    public interface SaveImageListener{
+        void onComplete(String url);
+    }
+    public void saveImage(Bitmap imageBitmap, String imageName,SaveImageListener listener ) {
+        modelFirebase.saveImage(imageBitmap,imageName,listener);
     }
 
     public enum BoardListLoadingState{
@@ -82,6 +89,12 @@ public class Model {
     }
 
     public void addBoard(Board board, AddBoardListener listener){
-        modelFirebase.addBoard(board, listener);
+        modelFirebase.addBoard(board, new AddBoardListener() {
+            @Override
+            public void onComplete() {
+                refreshBoardsList();
+                listener.onComplete();
+            }
+        });
     }
 }

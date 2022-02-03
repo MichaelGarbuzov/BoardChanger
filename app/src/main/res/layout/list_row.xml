@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/listrow_board_name"
             app:layout_constraintVertical_bias="1.0"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/board" />
 
         <TextView
             android:id="@+id/listrow_board_name"

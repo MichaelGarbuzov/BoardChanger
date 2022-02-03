@@ -28,16 +28,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add_board_add_image_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="30dp"
-        android:text="Add Image"
-        app:layout_constraintBottom_toTopOf="@+id/add_board_add_board_btn"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/add_board_add_board_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -135,6 +125,36 @@
             android:layout_height="wrap_content"
             android:hint="Description" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/add_board_take_image_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintBottom_toTopOf="@+id/add_board_add_image_btn"
+        app:layout_constraintStart_toStartOf="@+id/add_board_add_image_btn" />
+
+    <ImageButton
+        android:id="@+id/add_board_add_image_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="30dp"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:layout_constraintBottom_toTopOf="@+id/add_board_add_board_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/add_board_image_preview"
+        android:layout_width="122dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="8dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/add_board_add_image_btn"
+        app:layout_constraintStart_toEndOf="@+id/add_board_take_image_btn"
+        app:layout_constraintTop_toTopOf="@+id/add_board_take_image_btn"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

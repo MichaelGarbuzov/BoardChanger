@@ -1,5 +1,7 @@
 package com.example.boardchanger.model;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,24 +28,25 @@ import java.util.Map;
 
 public class ModelFirebase {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    public ModelFirebase(){
+    public ModelFirebase() {
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(false).build();
         db.setFirestoreSettings(settings);
     }
 
-    public interface GetAllBoardsListener{
+    public interface GetAllBoardsListener {
         void onComplete(List<Board> boardsList);
     }
 
     public void getAllBoards(Long lastUpdateDate, GetAllBoardsListener listener) {
         db.collection(Board.COLLECTION_NAME).get().addOnCompleteListener(task -> {
             List<Board> list = new LinkedList<Board>();
-            if(task.isSuccessful()){
-                for (QueryDocumentSnapshot doc : task.getResult()){
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot doc : task.getResult()) {
                     Board board = Board.create(doc.getData());
-                    if(board != null){
+                    if (board != null) {
                         list.add(board);
                     }
                 }
@@ -63,13 +70,35 @@ public class ModelFirebase {
         db.collection(Board.COLLECTION_NAME).document(boardName).get()
                 .addOnCompleteListener(task -> {
                     Board board = null;
-                    if (task.isSuccessful() & task.getResult()!=null) {
-                      board = Board.create(task.getResult().getData());
+                    if (task.isSuccessful() & task.getResult() != null) {
+                        board = Board.create(task.getResult().getData());
 
                     }
                     listener.onComplete(board);
                 });
 
 
+    }
+
+    public void saveImage(Bitmap imageBitmap, String imageName, Model.SaveImageListener listener) {
+
+        StorageReference storageRef = storage.getReference();
+
+        StorageReference imgRef = storageRef.child("/board_pictures/" + imageName);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = imgRef.putBytes(data);
+        uploadTask.addOnFailureListener(exception -> {
+            listener.onComplete(null);
+        }).addOnSuccessListener(taskSnapshot -> {
+            imgRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                Uri downloadUrl = uri;
+                listener.onComplete(downloadUrl.toString());
+            });
+
+        });
     }
 }
