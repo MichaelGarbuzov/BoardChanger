@@ -1,4 +1,4 @@
-package com.example.boardchanger;
+package com.example.boardchanger.feed;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,33 +6,23 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.boardchanger.R;
 import com.example.boardchanger.model.Board;
 import com.example.boardchanger.model.Model;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
 
 public class BoardsListFragment extends Fragment {
     BoardsListViewModel viewModel;

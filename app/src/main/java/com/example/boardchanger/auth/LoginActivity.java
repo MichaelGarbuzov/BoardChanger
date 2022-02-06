@@ -1,4 +1,4 @@
-package com.example.boardchanger;
+package com.example.boardchanger.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -6,10 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.boardchanger.R;
+import com.example.boardchanger.feed.MainFeedActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -24,9 +28,9 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
-        toolbar = findViewById(R.id.loginToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Login");
+       // toolbar = findViewById(R.id.loginToolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setTitle("Login");
 
 
         loginEmail = findViewById(R.id.loginEmail);

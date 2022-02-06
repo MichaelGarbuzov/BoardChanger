@@ -10,23 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BoardChanger">
         <activity
-            android:name=".MainFeedActivity"
+            android:name=".feed.MainFeedActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrationActivity"
-            android:exported="false" />
+            android:name=".auth.RegistrationActivity"
+            android:exported="false"
+            />
+
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
+            android:name=".auth.LoginActivity"
+            android:exported="false"
+            />
         <activity
-            android:name=".MainActivity"
+            android:name=".IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

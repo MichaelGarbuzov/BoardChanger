@@ -1,11 +1,10 @@
-package com.example.boardchanger;
+package com.example.boardchanger.feed;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.NavHost;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 
@@ -13,6 +12,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.boardchanger.auth.LoginActivity;
+import com.example.boardchanger.R;
 
 
 public class MainFeedActivity extends AppCompatActivity {
@@ -54,7 +56,7 @@ public class MainFeedActivity extends AppCompatActivity {
                     navCtl.navigate(R.id.action_global_profileFragment);
                     return true;
                 case R.id.menu_logout:
-                    Intent intent = new Intent(this,LoginActivity.class);
+                    Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                     return true;

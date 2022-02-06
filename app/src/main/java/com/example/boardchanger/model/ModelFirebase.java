@@ -11,6 +11,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +32,7 @@ import java.util.Map;
 public class ModelFirebase {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public ModelFirebase() {
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
@@ -103,4 +106,9 @@ public class ModelFirebase {
 
         });
     }
+    public boolean isConnected(){
+        FirebaseUser currUser = mAuth.getCurrentUser();
+        return (currUser != null);
+    }
+
 }

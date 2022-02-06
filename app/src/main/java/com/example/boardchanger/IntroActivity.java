@@ -11,7 +11,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.boardchanger.auth.LoginActivity;
+import com.example.boardchanger.feed.MainFeedActivity;
+import com.example.boardchanger.model.Model;
+
+public class IntroActivity extends AppCompatActivity {
     private static final int SPLASH = 3300;
 
     Animation topAnim,bottomAnim;
@@ -35,9 +39,15 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-                finish();
+                if(Model.instance.isConnected()){
+                    Intent intent = new Intent(IntroActivity.this, MainFeedActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         },SPLASH);
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="bottom"
     android:background="@drawable/background_design"
-    tools:context=".MainFeedActivity">
+    tools:context=".feed.MainFeedActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainfeed_navhost"

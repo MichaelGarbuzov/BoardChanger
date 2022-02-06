@@ -1,16 +1,18 @@
-package com.example.boardchanger;
+package com.example.boardchanger.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.boardchanger.R;
+import com.example.boardchanger.feed.MainFeedActivity;
 
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -26,9 +28,9 @@ public class RegistrationActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_registration);
 
-        toolbar = findViewById(R.id.RegistrationToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Registration");
+        //toolbar = findViewById(R.id.RegistrationToolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setTitle("Registration");
 
         regEmail = findViewById(R.id.RegistrationEmail);
         regPwd = findViewById(R.id.RegistrationPassword);

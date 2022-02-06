@@ -14,10 +14,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
+        android:layout_margin="3dp"
         android:background="#FFFFFF"
-        android:padding="8dp"
-        android:layout_margin="4dp">
+        android:padding="8dp">
 
 
         <TextView
@@ -39,18 +39,16 @@
             android:layout_width="118dp"
             android:layout_height="128dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/listrow_board_name"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/board" />
 
         <TextView
             android:id="@+id/listrow_board_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="30dp"
             android:text="@string/name_LR"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/listrow_image_v"

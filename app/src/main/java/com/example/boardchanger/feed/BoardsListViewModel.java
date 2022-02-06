@@ -1,4 +1,4 @@
-package com.example.boardchanger;
+package com.example.boardchanger.feed;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;

@@ -1,4 +1,4 @@
-package com.example.boardchanger;
+package com.example.boardchanger.feed;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.ALARM_SERVICE;
@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.boardchanger.R;
 import com.example.boardchanger.model.Board;
 import com.example.boardchanger.model.Model;
 

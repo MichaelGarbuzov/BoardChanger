@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background_design"
-    tools:context=".RegistrationActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/RegistrationToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+    tools:context=".auth.RegistrationActivity">
 
     <ImageView
         android:layout_width="200dp"

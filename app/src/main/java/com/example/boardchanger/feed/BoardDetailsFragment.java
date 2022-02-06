@@ -1,4 +1,4 @@
-package com.example.boardchanger;
+package com.example.boardchanger.feed;
 
 import android.os.Bundle;
 
@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.boardchanger.R;
 import com.example.boardchanger.model.Board;
 import com.example.boardchanger.model.Model;
 import com.squareup.picasso.Picasso;
