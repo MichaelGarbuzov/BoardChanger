@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.boardchanger.auth.LoginActivity;
 import com.example.boardchanger.feed.MainFeedActivity;
 import com.example.boardchanger.model.Model;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class IntroActivity extends AppCompatActivity {
     private static final int SPLASH = 3300;
@@ -32,14 +33,14 @@ public class IntroActivity extends AppCompatActivity {
         bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
         imageView = findViewById(R.id.imageView);
         textView = findViewById(R.id.text);
-
         imageView.setAnimation(topAnim);
         textView.setAnimation(bottomAnim);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(Model.instance.isConnected()){
+                if(FirebaseAuth.getInstance().getCurrentUser()!= null){
                     Intent intent = new Intent(IntroActivity.this, MainFeedActivity.class);
                     startActivity(intent);
                     finish();

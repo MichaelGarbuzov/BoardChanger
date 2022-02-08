@@ -74,7 +74,6 @@
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
             android:background="@color/white"
-            android:divider="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.example.boardchanger.auth.LoginActivity;
 import com.example.boardchanger.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainFeedActivity extends AppCompatActivity {
@@ -25,11 +26,6 @@ public class MainFeedActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main_feed);
-        /*    if(savedInstanceState == null){
-                Intent firstLoginIntent = new Intent(this, LoginActivity.class);
-                startActivity(firstLoginIntent);
-                finish();
-            }*/
             toolbar = findViewById(R.id.mainfeed_toolbar);
             setSupportActionBar(toolbar);
             NavHost navHost = (NavHost) getSupportFragmentManager().findFragmentById(R.id.mainfeed_navhost);
@@ -56,6 +52,7 @@ public class MainFeedActivity extends AppCompatActivity {
                     navCtl.navigate(R.id.action_global_profileFragment);
                     return true;
                 case R.id.menu_logout:
+                    FirebaseAuth.getInstance().signOut();
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                     finish();
