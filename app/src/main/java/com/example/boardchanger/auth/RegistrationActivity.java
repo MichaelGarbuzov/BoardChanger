@@ -87,14 +87,12 @@ public class RegistrationActivity extends AppCompatActivity {
                             startActivity(feed);
                             finish();
                         }else{
-                            Toast.makeText(RegistrationActivity.this,"Error ! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            return;
-
+                            Toast.makeText(RegistrationActivity.this,"Error! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
             }
         });
-
     }
 }
