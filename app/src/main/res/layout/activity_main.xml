@@ -22,10 +22,18 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BoardChanger"
         android:layout_gravity="center"
+        android:fontFamily="@font/aclonica"
+        android:text="BoardChanger"
         android:textColor="#fff"
-        android:textSize="30sp"
+        android:textSize="30sp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        app:lottie_autoPlay="true"
+        android:elevation="5dp"
+        app:lottie_rawRes="@raw/surf_animation"
         />
 
 
