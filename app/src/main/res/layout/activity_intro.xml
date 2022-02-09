@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/aclonica"
+        android:fontFamily="@fonts/aclonica"
         android:text="BoardChanger"
         android:textColor="#fff"
         android:textSize="30sp" />

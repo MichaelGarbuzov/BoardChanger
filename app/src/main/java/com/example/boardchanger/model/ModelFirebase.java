@@ -40,6 +40,7 @@ public class ModelFirebase {
         db.setFirestoreSettings(settings);
     }
 
+
     public interface GetAllBoardsListener {
         void onComplete(List<Board> boardsList);
     }
@@ -106,9 +107,52 @@ public class ModelFirebase {
 
         });
     }
-    public boolean isConnected(){
+  /*  public boolean isConnected(){
         FirebaseUser currUser = mAuth.getCurrentUser();
         return (currUser != null);
+    }*/
+
+    public interface GetAllUsersListener{
+        void onComplete(List<User> usersList);
+    }
+
+    public void getAllUsers(Long lastUpdateDate, GetAllUsersListener listener) {
+        db.collection(User.COLLECTION_NAME)
+                .get().addOnCompleteListener(task -> {
+            List<User> list = new LinkedList<User>();
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    User user = User.create(doc.getData());
+                    if (user != null) {
+                        list.add(user);
+                    }
+                }
+            }
+            listener.onComplete(list);
+        });
+    }
+
+    public void getUserByEmail(String userName, Model.getUserByEmail listener) {
+        db.collection(User.COLLECTION_NAME).document(userName).get()
+                .addOnCompleteListener(task -> {
+                    User user = null;
+                    if (task.isSuccessful() & task.getResult() != null) {
+                        user = User.create(task.getResult().getData());
+
+                    }
+                    listener.onComplete(user);
+                });
+    }
+
+    public void addUser(User user, Model.AddUserListener listener) {
+        Map<String, Object> json = user.toJson();
+
+        db.collection(User.COLLECTION_NAME)
+                .document(user.getEmail())
+                .set(json)
+                .addOnSuccessListener(unused -> listener.onComplete())
+                .addOnFailureListener(e -> listener.onComplete());
+
     }
 
 }

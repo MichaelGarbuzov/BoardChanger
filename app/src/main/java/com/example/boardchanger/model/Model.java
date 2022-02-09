@@ -27,7 +27,7 @@ public class Model {
     public interface SaveImageListener{
         void onComplete(String url);
     }
-    public void saveImage(Bitmap imageBitmap, String imageName,SaveImageListener listener ) {
+    public void saveImage(Bitmap imageBitmap, String imageName,SaveImageListener listener) {
         modelFirebase.saveImage(imageBitmap,imageName,listener);
     }
 
@@ -98,7 +98,29 @@ public class Model {
         });
     }
 
-    public boolean isConnected(){
-        return modelFirebase.isConnected();
+    public interface AddUserListener{
+        void onComplete();
     }
+
+    public interface getUserByEmail{
+        void onComplete(User user);
+    }
+
+    public User getUserByEmail(String userName, getUserByEmail listener){
+        modelFirebase.getUserByEmail(userName, listener);
+        return null;
+    }
+
+    public void addUser(User user, AddUserListener listener){
+        modelFirebase.addUser(user, new AddUserListener() {
+            @Override
+            public void onComplete() {
+                listener.onComplete();
+            }
+        });
+    }
+
+    /*public boolean isConnected(){
+        return modelFirebase.isConnected();
+    }*/
 }

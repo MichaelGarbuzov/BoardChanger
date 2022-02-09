@@ -3,6 +3,8 @@ package com.example.boardchanger.feed;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.ALARM_SERVICE;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,6 +33,7 @@ import android.widget.Toast;
 import com.example.boardchanger.R;
 import com.example.boardchanger.model.Board;
 import com.example.boardchanger.model.Model;
+import com.example.boardchanger.shared.ImageHandler;
 
 import java.io.InputStream;
 
@@ -81,26 +84,17 @@ public class AddBoardFragment extends Fragment {
         camBtn = view.findViewById(R.id.add_board_take_image_btn);
         galleryBtn = view.findViewById(R.id.add_board_add_image_btn);
 
-        camBtn.setOnClickListener(v->{
-            openCamera();
-        });
+       camBtn.setOnClickListener(v->{
+            Intent intent = ImageHandler.openCamera();
+           startActivityForResult(intent,REQUEST_IMAGE_SELECTION);
+
+       });
 
         galleryBtn.setOnClickListener(v->{
-            openGallery();
+            Intent intent = ImageHandler.openGallery();
+            startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
         });
         return view;
-    }
-    private void openGallery(){
-        Intent openGalleryIntent = new Intent();
-        openGalleryIntent.setType("image/*");
-        openGalleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(openGalleryIntent,REQUEST_IMAGE_SELECTION);
-
-    }
-
-    private void openCamera() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
     }
 
     @Override
