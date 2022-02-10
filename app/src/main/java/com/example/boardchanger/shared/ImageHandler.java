@@ -21,7 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.InputStream;
 
 public class ImageHandler {
+    String imageCat;
 
+    public String getImageCat(){
+        return imageCat;
+    }
     public static Intent openGallery(){
         Intent openGalleryIntent = new Intent();
         openGalleryIntent.setType("image/*");

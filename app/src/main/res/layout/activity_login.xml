@@ -60,10 +60,11 @@
         android:id="@+id/loginPageQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/don_t_have_an_account_register_LOGIN"
-        android:textColor="#fff"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/aclonica"
         android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:text="@string/don_t_have_an_account_register_LOGIN"
+        android:textColor="#fff" />
 
     <ProgressBar
         android:id="@+id/login_progress_bar"

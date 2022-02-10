@@ -27,8 +27,8 @@ public class Model {
     public interface SaveImageListener{
         void onComplete(String url);
     }
-    public void saveImage(Bitmap imageBitmap, String imageName,SaveImageListener listener) {
-        modelFirebase.saveImage(imageBitmap,imageName,listener);
+    public void saveImage(Bitmap imageBitmap, String imageName,String imageCat, SaveImageListener listener) {
+        modelFirebase.saveImage(imageBitmap,imageName,imageCat, listener);
     }
 
     public enum BoardListLoadingState{

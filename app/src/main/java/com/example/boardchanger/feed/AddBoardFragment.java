@@ -53,6 +53,7 @@ public class AddBoardFragment extends Fragment {
     ImageView boardP;
     ImageButton galleryBtn;
     ImageButton camBtn;
+    String imageCat = "/board_pictures/";
 
     public AddBoardFragment() {
         // Required empty public constructor
@@ -86,13 +87,13 @@ public class AddBoardFragment extends Fragment {
 
        camBtn.setOnClickListener(v->{
             Intent intent = ImageHandler.openCamera();
-           startActivityForResult(intent,REQUEST_IMAGE_SELECTION);
+           startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
 
        });
 
         galleryBtn.setOnClickListener(v->{
             Intent intent = ImageHandler.openGallery();
-            startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(intent,REQUEST_IMAGE_SELECTION);
         });
         return view;
     }
@@ -149,7 +150,8 @@ public class AddBoardFragment extends Fragment {
         String year = boardYear.getText().toString();
         String address = boardAddress.getText().toString();
         Board board = new Board(name, year, price, desc, address);
-        Model.instance.saveImage(imageBitmap, name + ".jpg", url -> {
+
+        Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
             board.setImageUrl(url);
             Model.instance.addBoard(board, () -> {
                 Navigation.findNavController(boardName).navigateUp();

@@ -86,11 +86,11 @@ public class ModelFirebase {
 
     }
 
-    public void saveImage(Bitmap imageBitmap, String imageName, Model.SaveImageListener listener) {
+    public void saveImage(Bitmap imageBitmap, String imageName,String imageCat, Model.SaveImageListener listener) {
 
         StorageReference storageRef = storage.getReference();
 
-        StorageReference imgRef = storageRef.child("/board_pictures/" + imageName);
+        StorageReference imgRef = storageRef.child(imageCat + imageName);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -107,10 +107,6 @@ public class ModelFirebase {
 
         });
     }
-  /*  public boolean isConnected(){
-        FirebaseUser currUser = mAuth.getCurrentUser();
-        return (currUser != null);
-    }*/
 
     public interface GetAllUsersListener{
         void onComplete(List<User> usersList);

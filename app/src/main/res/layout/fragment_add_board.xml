@@ -52,6 +52,7 @@
             android:id="@+id/add_board_model"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
             android:hint="@string/model_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,6 +71,7 @@
             android:id="@+id/add_board_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
             android:hint="@string/year_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,6 +90,7 @@
             android:id="@+id/add_board_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
             android:hint="@string/asking_price_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,6 +109,7 @@
             android:id="@+id/add_board_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
             android:hint="@string/address_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,6 +127,7 @@
             android:id="@+id/add_board_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/aclonica"
             android:hint="@string/description_AB" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,6 +136,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:background="@color/material_on_surface_disabled"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintBottom_toTopOf="@+id/add_board_add_image_btn"
         app:layout_constraintStart_toStartOf="@+id/add_board_add_image_btn" />
@@ -141,6 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="30dp"
+        android:background="@color/material_on_surface_disabled"
         android:src="@android:drawable/ic_menu_gallery"
         app:layout_constraintBottom_toTopOf="@+id/add_board_add_board_btn"
         app:layout_constraintStart_toStartOf="parent" />

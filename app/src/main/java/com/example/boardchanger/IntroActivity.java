@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.boardchanger.auth.LoginActivity;
 import com.example.boardchanger.feed.MainFeedActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,7 @@ public class IntroActivity extends AppCompatActivity {
     Animation topAnim,bottomAnim;
     ImageView imageView;
     TextView textView;
+    LottieAnimationView carAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,8 @@ public class IntroActivity extends AppCompatActivity {
         textView = findViewById(R.id.text);
         imageView.setAnimation(topAnim);
         textView.setAnimation(bottomAnim);
-
+        carAnim = findViewById(R.id.intro_animation_car);
+        carAnim.animate().translationX(2000).setDuration(2000).setStartDelay(2500);
 
         new Handler().postDelayed(new Runnable() {
             @Override

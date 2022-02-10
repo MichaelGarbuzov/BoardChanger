@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.Navigation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -51,7 +52,9 @@ public class RegistrationActivity extends AppCompatActivity {
     ImageButton uploadImage;
     FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
-    Bitmap imageBitmap;
+    Bitmap imageBitmap = null;
+    String imageCat = "/user_pictures/";
+    User user;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_SELECTION = 2;
@@ -83,11 +86,13 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
         takeImage.setOnClickListener(v -> {
-            ImageHandler.openCamera();
+            Intent intent = ImageHandler.openCamera();
+            startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
         });
 
         uploadImage.setOnClickListener(v -> {
-            ImageHandler.openGallery();
+            Intent intent = ImageHandler.openGallery();
+            startActivityForResult(intent,REQUEST_IMAGE_SELECTION);
         });
 
         regBtn.setOnClickListener(new View.OnClickListener()
@@ -128,9 +133,15 @@ public class RegistrationActivity extends AppCompatActivity {
                             userEmail = regEmail.getText().toString();
                             userName = regName.getText().toString();
                             userPassword = regPwd.getText().toString();
-                            User user = new User(userEmail, userName, userPassword);
-                            Model.instance.addUser(user, () -> {
-                                Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                            user = new User(userEmail, userName, userPassword);
+                            Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
+                                user.setImageUrl(url);
+                                Model.instance.addUser(user, () -> {
+                                    Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
+                                    startActivity(feed);
+                                    finish();
+                                });
                             });
                             Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
                             startActivity(feed);
@@ -152,6 +163,8 @@ public class RegistrationActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle extras = data.getExtras();
                 imageBitmap = (Bitmap) extras.get("data");
+                regAddImage.setText("Picture Taken");
+
             }
         } else if (requestCode == REQUEST_IMAGE_SELECTION) {
             if (resultCode == RESULT_OK) {
@@ -159,6 +172,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     final Uri imageUri = data.getData();
                     final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
                     imageBitmap = BitmapFactory.decodeStream(imageStream);
+                    regAddImage.setText("Picture Uploaded");
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(RegistrationActivity.this, "Failed to select image", Toast.LENGTH_LONG).show();
