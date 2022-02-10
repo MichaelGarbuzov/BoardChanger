@@ -5,10 +5,15 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.boardchanger.MyApplication;
+import com.example.boardchanger.model.posts.Board;
+import com.example.boardchanger.model.posts.BoardDao;
+import com.example.boardchanger.model.users.User;
+import com.example.boardchanger.model.users.UserDao;
 
-@Database(entities = {Board.class}, version = 6)
+@Database(entities = {Board.class, User.class}, version = 6)
 abstract class BoardChangerDBRepository extends RoomDatabase{
     public abstract BoardDao boardDao();
+    public abstract UserDao userDao();
 }
 
 public class BoardChangerLocalDB{

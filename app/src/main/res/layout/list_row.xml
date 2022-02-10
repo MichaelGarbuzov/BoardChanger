@@ -7,16 +7,15 @@
     android:layout_margin="8dp"
     android:layout_marginBottom="20dp"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="?attr/colorPrimaryDark"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="16dp"
+    app:cardCornerRadius="100dp"
+    app:cardElevation="30dp"
     app:cardPreventCornerOverlap="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_margin="3dp"
-        android:background="#FFFFFF"
+        android:background="@color/browser_actions_bg_grey"
         android:padding="8dp">
 
 

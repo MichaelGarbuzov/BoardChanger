@@ -1,4 +1,4 @@
-package com.example.boardchanger.model;
+package com.example.boardchanger.model.posts;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

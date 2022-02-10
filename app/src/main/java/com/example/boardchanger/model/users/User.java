@@ -1,6 +1,4 @@
-package com.example.boardchanger.model;
-
-import android.widget.ImageView;
+package com.example.boardchanger.model.users;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -15,8 +13,8 @@ import java.util.Map;
 @Entity
 public class User {
     final public static String COLLECTION_NAME = "users";
-    //@PrimaryKey
-    //@NonNull
+    @PrimaryKey
+    @NonNull
     String email;
     String name;
     String imageUrl;

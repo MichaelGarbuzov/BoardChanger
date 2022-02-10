@@ -3,7 +3,7 @@ package com.example.boardchanger.feed;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.boardchanger.model.Board;
+import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.Model;
 
 import java.util.List;

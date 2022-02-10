@@ -1,6 +1,4 @@
-package com.example.boardchanger.model;
-
-import android.widget.ImageView;
+package com.example.boardchanger.model.posts;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

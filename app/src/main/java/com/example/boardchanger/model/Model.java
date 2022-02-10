@@ -1,7 +1,6 @@
 package com.example.boardchanger.model;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,8 +10,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.boardchanger.MyApplication;
+import com.example.boardchanger.model.posts.Board;
+import com.example.boardchanger.model.users.User;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

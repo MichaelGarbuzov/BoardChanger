@@ -1,25 +1,18 @@
 package com.example.boardchanger.feed;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.ALARM_SERVICE;
-
-import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.boardchanger.R;
-import com.example.boardchanger.model.Board;
+import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.Model;
 import com.example.boardchanger.shared.ImageHandler;
 

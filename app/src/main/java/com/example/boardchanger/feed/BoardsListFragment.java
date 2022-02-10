@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.boardchanger.R;
-import com.example.boardchanger.model.Board;
+import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.Model;
 import com.squareup.picasso.Picasso;
 
