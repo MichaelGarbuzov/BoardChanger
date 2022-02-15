@@ -40,6 +40,10 @@
         android:id="@+id/menu_profile"
         android:name="com.example.boardchanger.feed.profileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="UserProfileData"
+            app:argType="string" />
+    </fragment>
     <action android:id="@+id/action_global_profileFragment" app:destination="@id/menu_profile" />
 </navigation>

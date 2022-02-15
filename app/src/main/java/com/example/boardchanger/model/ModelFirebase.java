@@ -117,8 +117,8 @@ public class ModelFirebase {
         });
     }
 
-    public void getUserByEmail(String userName, Model.getUserByEmail listener) {
-        db.collection(User.COLLECTION_NAME).document(userName).get()
+    public void getUserByEmail(String userEmail, Model.getUserByEmail listener) {
+        db.collection(User.COLLECTION_NAME).document(userEmail).get()
                 .addOnCompleteListener(task -> {
                     User user = null;
                     if (task.isSuccessful() & task.getResult() != null) {

@@ -119,8 +119,4 @@ public class Model {
             }
         });
     }
-
-    /*public boolean isConnected(){
-        return modelFirebase.isConnected();
-    }*/
 }

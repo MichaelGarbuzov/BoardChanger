@@ -123,7 +123,7 @@ public class AddBoardFragment extends Fragment {
         addBoard.setEnabled(false);
         if (boardYear.getText().toString().equals("") || boardDesc.getText().toString().equals("") ||
                 boardName.getText().toString().equals("") || boardPrice.getText().toString().equals("") ||
-                boardAddress.getText().toString().equals("")) {
+                boardAddress.getText().toString().equals("") || boardPhoneNum.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "All Fields Must be Filled!", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
             addBoard.setEnabled(true);
