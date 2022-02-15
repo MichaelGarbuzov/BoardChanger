@@ -1,5 +1,7 @@
 package com.example.boardchanger.feed;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,6 +32,7 @@ public class BoardDetailsFragment extends Fragment {
     TextView boardDesc;
     TextView address;
     ImageView boardImage;
+    Button callBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,11 +58,19 @@ public class BoardDetailsFragment extends Fragment {
          boardDesc = view.findViewById(R.id.board_details_desc);
          address = view.findViewById(R.id.board_details_address);
          boardImage = view.findViewById(R.id.board_details_image);
+         callBtn = view.findViewById(R.id.board_details_call_btn);
 
-
-        Button sendMsg = view.findViewById(R.id.board_details_sendmessage_btn);
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+ Board.getPhoneNum()));
+                startActivity(intent);
+            }
+        });
+       /* Button sendMsg = view.findViewById(R.id.board_details_call_btn);
         sendMsg.setOnClickListener(Navigation.createNavigateOnClickListener(
-                BoardDetailsFragmentDirections.actionBoardDetailsFragmentToSendMessageFragment()));
+                BoardDetailsFragmentDirections.actionBoardDetailsFragmentToSendMessageFragment()));*/
         return view;
     }
 }

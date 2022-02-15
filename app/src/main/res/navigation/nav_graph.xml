@@ -13,9 +13,6 @@
         <argument
             android:name="BoardNameData"
             app:argType="string" />
-        <action
-            android:id="@+id/action_boardDetailsFragment_to_sendMessageFragment"
-            app:destination="@id/sendMessageFragment" />
     </fragment>
     <fragment
         android:id="@+id/boardsListFragment"

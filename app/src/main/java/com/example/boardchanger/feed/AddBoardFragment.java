@@ -38,6 +38,7 @@ public class AddBoardFragment extends Fragment {
     EditText boardDesc;
     EditText boardAddress;
     EditText boardYear;
+    EditText boardPhoneNum;
     Button addBoard;
     ProgressBar progressBar;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -65,6 +66,7 @@ public class AddBoardFragment extends Fragment {
         progressBar = view.findViewById(R.id.add_board_progressbar);
         progressBar.setVisibility(View.GONE);
         boardP = view.findViewById(R.id.add_board_image_preview);
+        boardPhoneNum = view.findViewById(R.id.add_board_phone_num);
 
 
 
@@ -141,9 +143,10 @@ public class AddBoardFragment extends Fragment {
         String price = boardPrice.getText().toString();
         String desc = boardDesc.getText().toString();
         String year = boardYear.getText().toString();
+        String phoneNum = boardPhoneNum.getText().toString();
         String address = boardAddress.getText().toString();
         Board board = new Board(name, year, price, desc, address);
-
+        board.setPhoneNum(phoneNum);
         Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
             board.setImageUrl(url);
             Model.instance.addBoard(board, () -> {

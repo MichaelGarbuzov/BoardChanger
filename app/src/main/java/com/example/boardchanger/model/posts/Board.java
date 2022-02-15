@@ -22,8 +22,17 @@ public class Board {
     String year="";
     String address="";
     String imageUrl;
+    static String phoneNum;
     Long updateDate = new Long(0);
 
+
+    public static String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
 
    /* public String getUser() {
         return usersEmail;
@@ -52,6 +61,7 @@ public class Board {
        Timestamp ts = (Timestamp)json.get("updateDate");
        Long updateDate = ts.getSeconds();
        String imageUrl = (String)json.get("imageUrl");
+       String phoneNum = (String)json.get("phoneNum");
        Board board = new Board(name, year, price, description, address);
        board.setUpdateDate(updateDate);
        board.setImageUrl(imageUrl);
@@ -109,6 +119,7 @@ public class Board {
         json.put("address", address);
         json.put("updateDate", FieldValue.serverTimestamp());
         json.put("imageUrl", imageUrl);
+        json.put("phoneNum",phoneNum);
         return json;
     }
     public void setUpdateDate(Long updateDate){

@@ -40,4 +40,6 @@
     <string name="don_t_have_an_account_register_LOGIN">Don\'t have an account? Register</string>
     <string name="enter_name_REG">Enter Name</string>
     <string name="add_profile_image_REG">Add Profile Image</string>
+    <string name="board_details_call">CALL</string>
+    <string name="phone_number_add_board">Phone Number</string>
 </resources>
