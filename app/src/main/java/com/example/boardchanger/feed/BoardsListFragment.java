@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
-import android.view.RoundedCorner;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -23,6 +22,7 @@ import android.widget.TextView;
 import com.example.boardchanger.R;
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.posts.BoardsListViewModel;
 import com.squareup.picasso.Picasso;
 
 public class BoardsListFragment extends Fragment {

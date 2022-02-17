@@ -32,7 +32,7 @@
         android:layout_marginBottom="15dp"
         android:background="@android:color/transparent"
         android:outlineAmbientShadowColor="@color/black"
-        android:src="@drawable/ic_baseline_add_24"
+        android:src="@drawable/plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

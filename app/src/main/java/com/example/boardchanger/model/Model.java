@@ -24,6 +24,7 @@ public class Model {
     ModelFirebase modelFirebase = new ModelFirebase();
     private Model(){
     }
+
     public interface SaveImageListener{
         void onComplete(String url);
     }
@@ -42,7 +43,7 @@ public class Model {
     }
 
     MutableLiveData<List<Board>> boardsList = new MutableLiveData<List<Board>>();
-    public LiveData<List<Board>> getAll(){
+    public LiveData<List<Board>> getAllBoards(){
         if(boardsList.getValue() == null) { refreshBoardsList(); }
         return boardsList;
     }

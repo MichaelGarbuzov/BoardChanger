@@ -63,6 +63,7 @@ public class Board {
        String imageUrl = (String)json.get("imageUrl");
        String phoneNum = (String)json.get("phoneNum");
        Board board = new Board(name, year, price, description, address);
+       board.setPhoneNum(phoneNum);
        board.setUpdateDate(updateDate);
        board.setImageUrl(imageUrl);
        return board;

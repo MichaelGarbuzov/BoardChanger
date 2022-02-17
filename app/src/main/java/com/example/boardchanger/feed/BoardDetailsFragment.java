@@ -31,6 +31,7 @@ public class BoardDetailsFragment extends Fragment {
     TextView boardPrice;
     TextView boardDesc;
     TextView address;
+    TextView phoneNum;
     ImageView boardImage;
     Button callBtn;
 

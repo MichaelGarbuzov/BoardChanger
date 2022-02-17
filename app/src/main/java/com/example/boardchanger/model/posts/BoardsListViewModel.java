@@ -1,4 +1,4 @@
-package com.example.boardchanger.feed;
+package com.example.boardchanger.model.posts;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,7 +12,7 @@ public class BoardsListViewModel extends ViewModel {
     LiveData<List<Board>> data;
 
     public BoardsListViewModel(){
-        data = Model.instance.getAll();
+        data = Model.instance.getAllBoards();
     }
 
     public LiveData<List<Board>> getData() {
