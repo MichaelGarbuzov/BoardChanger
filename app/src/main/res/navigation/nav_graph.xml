@@ -37,7 +37,7 @@
         android:label="Send Message"
         tools:layout="@layout/fragment_send_message" />
     <fragment
-        android:id="@+id/menu_profile"
+        android:id="@+id/menuProfileFragment"
         android:name="com.example.boardchanger.feed.profileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile">
@@ -45,5 +45,9 @@
             android:name="UserProfileData"
             app:argType="string" />
     </fragment>
-    <action android:id="@+id/action_global_profileFragment" app:destination="@id/menu_profile" />
+    <action android:id="@+id/action_global_profileFragment" app:destination="@id/menuProfileFragment" >
+        <argument
+            android:name="UserProfileData"
+            android:defaultValue="User" />
+    </action>
 </navigation>

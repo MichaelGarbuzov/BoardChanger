@@ -107,8 +107,8 @@ public class Model {
         void onComplete(User user);
     }
 
-    public User getUserByEmail(String userName, getUserByEmail listener){
-        modelFirebase.getUserByEmail(userName, listener);
+    public User getUserByEmail(String email, getUserByEmail listener){
+        modelFirebase.getUserByEmail(email, listener);
         return null;
     }
 

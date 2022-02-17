@@ -48,7 +48,7 @@ public class MainFeedActivity extends AppCompatActivity {
                 case android.R.id.home:
                     navCtl.navigateUp();
                     return true;
-                case R.id.menu_profile:
+                case R.id.menuProfileFragment:
                     navCtl.navigate(R.id.action_global_profileFragment);
                     return true;
                 case R.id.menu_logout:

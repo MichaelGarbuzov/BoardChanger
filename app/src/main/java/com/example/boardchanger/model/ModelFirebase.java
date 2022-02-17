@@ -21,6 +21,7 @@ import java.util.Map;
 public class ModelFirebase {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseAuth userAuth = FirebaseAuth.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public ModelFirebase() {
@@ -116,8 +117,8 @@ public class ModelFirebase {
             listener.onComplete(list);
         });
     }
-
     public void getUserByEmail(String userEmail, Model.getUserByEmail listener) {
+        userEmail = userAuth.getCurrentUser().getEmail();
         db.collection(User.COLLECTION_NAME).document(userEmail).get()
                 .addOnCompleteListener(task -> {
                     User user = null;
@@ -127,6 +128,7 @@ public class ModelFirebase {
                     }
                     listener.onComplete(user);
                 });
+
     }
 
     public void addUser(User user, Model.AddUserListener listener) {
