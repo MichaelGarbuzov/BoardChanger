@@ -21,17 +21,18 @@
             android:layout_height="match_parent"
             android:paddingTop="64dp">
 
+
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageButton
         android:id="@+id/boards_add_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@android:color/transparent"
-        android:outlineAmbientShadowColor="@color/black"
+        android:layout_width="46dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/material_on_surface_disabled"
+        android:contentDescription="@string/addButton_list"
         android:src="@drawable/plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

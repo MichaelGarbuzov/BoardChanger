@@ -68,13 +68,11 @@
 
         <ImageButton
             android:id="@+id/register_add_image_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
 
             android:layout_marginStart="16dp"
-            android:background="@color/material_on_surface_disabled"
-            android:scrollbarSize="4dp"
             android:src="@android:drawable/ic_menu_gallery"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,11 +80,10 @@
 
         <ImageButton
             android:id="@+id/register_take_image_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="16dp"
-            android:background="@color/material_on_surface_disabled"
             android:scaleType="center"
             android:src="@android:drawable/ic_menu_camera"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +94,6 @@
             android:id="@+id/register_add_profile_image_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/aclonica"
             android:text="@string/add_profile_image_REG"
             android:textColor="#FFFFFF"
             android:textColorLink="#8C2F2F"
@@ -123,7 +119,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/aclonica"
         android:gravity="center"
         android:text="@string/already_have_an_account_login_REG"
         android:textColor="#fff" />

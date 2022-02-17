@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/drawable/background_design.xml" value="0.240625" />
-        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/drawable/baseline_account_circle_24.xml" value="0.240625" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/drawable/baseline_logout_24.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/drawable/dollar_sign.xml" value="0.15677083333333333" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.3398148148148148" />
@@ -17,29 +15,36 @@
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/activity_main_feed.xml" value="0.33" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/activity_registration.xml" value="0.33" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/fragment_add_board.xml" value="0.25" />
-        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/fragment_board_details.xml" value="0.25" />
-        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/fragment_boards_list.xml" value="0.75" />
+        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/fragment_board_details.xml" value="0.2" />
+        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/fragment_boards_list.xml" value="0.212507237984945" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/fragment_profile.xml" value="0.21" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/fragment_send_message.xml" value="0.25" />
-        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/list_row.xml" value="0.5" />
+        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/layout/list_row.xml" value="0.33" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/menu/board_list_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/menu/main_menu.xml" value="0.2109375" />
-        <entry key="..\:/Users/daniel/Downloads/BoardChanger/app/src/main/res/menu/profile_menu.xml" value="0.2234375" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable-v24/button.xml" value="0.153125" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable/background_design.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable/baseline_logout_24.xml" value="0.1" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable/ic_lock.xml" value="0.17604166666666668" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable/inputs.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/drawable/plus_button.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/activity_intro.xml" value="0.1" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/activity_login.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/activity_main_feed.xml" value="0.1796875" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/activity_registration.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/fragment_boards_list.xml" value="0.1322463768115942" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/fragment_add_board.xml" value="0.1" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/fragment_board_details.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/fragment_boards_list.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/fragment_send_message.xml" value="0.1" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/list_row.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/login.xml" value="0.1640625" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/layout/register.xml" value="0.1640625" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/menu/main_menu.xml" value="0.1796875" />
+        <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/menu/profile_menu.xml" value="0.1" />
         <entry key="..\:/Users/micha/Desktop/BoardChanger/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17604166666666668" />
       </map>
     </option>

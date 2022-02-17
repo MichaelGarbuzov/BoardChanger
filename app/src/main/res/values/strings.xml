@@ -42,4 +42,5 @@
     <string name="add_profile_image_REG">Add Profile Image</string>
     <string name="board_details_call">CALL</string>
     <string name="phone_number_add_board">Phone Number</string>
+    <string name="addButton_list">addImage</string>
 </resources>

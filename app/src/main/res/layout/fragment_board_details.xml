@@ -17,8 +17,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="25dp"
+        android:fontFamily="@font/aclonica"
         android:text="@string/description_BD"
-        android:textSize="16sp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/board_details_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +32,9 @@
         android:layout_marginStart="120dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="120dp"
+        android:fontFamily="@font/aclonica"
         android:text="@string/name_BD"
-        android:textSize="24sp"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/board_details_image" />
@@ -42,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,8 +58,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/aclonica"
         android:text="@string/year_BD"
-        android:textSize="16sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/board_details_name" />
@@ -65,12 +68,26 @@
     <TextView
         android:id="@+id/board_details_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:text="@string/price_BD"
+        android:textColor="@color/teal_200"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/board_details_year"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/board_details_image" />
+        app:layout_constraintTop_toTopOf="@+id/board_details_year" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_weight="1"
+        android:text="$"
+        android:textColor="@color/teal_200"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/board_details_price"
+        app:layout_constraintTop_toTopOf="@+id/board_details_price" />
 
     <Button
         android:id="@+id/board_details_call_btn"
@@ -88,7 +105,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
+        android:fontFamily="@font/aclonica"
         android:text="@string/address_BD"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/board_details_call_btn"
         app:layout_constraintEnd_toEndOf="parent" />
 
