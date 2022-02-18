@@ -43,16 +43,15 @@ public class profileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
-        String userProfileData = profileFragmentArgs.fromBundle(getArguments()).getUserProfileData();
-        User user = Model.instance.getUserByEmail(userProfileData, new Model.getUserByEmail(){
+        User user = Model.instance.getUserByEmail( new Model.getUserByEmail() {
             @Override
-            public void onComplete(User user){
+            public void onComplete(User user) {
                 userEmail.setText(user.getEmail());
                 userName.setText(user.getName());
                 Picasso.get().load(user.getImageUrl()).into(profileImage);
             }
 
-    });
+        });
         profileImage = view.findViewById(R.id.profile_image);
         userName = view.findViewById(R.id.profile_name);
         userEmail = view.findViewById(R.id.profile_email);
