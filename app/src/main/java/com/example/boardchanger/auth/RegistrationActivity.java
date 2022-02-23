@@ -133,15 +133,17 @@ public class RegistrationActivity extends AppCompatActivity {
                             userName = regName.getText().toString();
                             userPassword = regPwd.getText().toString();
                             user = new User(userEmail, userName, userPassword);
+                            if(imageBitmap != null){
                             Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
                                 user.setImageUrl(url);
+                                    });}
                                 Model.instance.addUser(user, () -> {
                                     Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                     Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
                                     startActivity(feed);
                                     finish();
                                 });
-                            });
+
                             Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
                             startActivity(feed);
                             finish();

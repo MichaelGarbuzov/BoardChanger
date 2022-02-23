@@ -147,6 +147,7 @@ public class AddBoardFragment extends Fragment {
         String address = boardAddress.getText().toString();
         Board board = new Board(name, year, price, desc, address);
         board.setPhoneNum(phoneNum);
+        board.setUser();
         Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
             board.setImageUrl(url);
             Model.instance.addBoard(board, () -> {

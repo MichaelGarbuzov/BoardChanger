@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 
 import java.util.HashMap;
@@ -15,8 +16,8 @@ public class Board {
     final public static String COLLECTION_NAME = "boards";
     @PrimaryKey
     @NonNull
-    //String usersEmail;
     String name="";
+    String usersEmail;
     String price="";
     String description="";
     String year="";
@@ -34,13 +35,13 @@ public class Board {
         this.phoneNum = phoneNum;
     }
 
-   /* public String getUser() {
+     public String getUser() {
         return usersEmail;
     }
 
-    public void setUser(String user) {
-        this.usersEmail = user;
-    }*/
+    public void setUser() {
+        this.usersEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    }
 
     public Board() {}
 
@@ -66,6 +67,7 @@ public class Board {
        board.setPhoneNum(phoneNum);
        board.setUpdateDate(updateDate);
        board.setImageUrl(imageUrl);
+       board.setUser();
        return board;
     }
 
@@ -121,6 +123,7 @@ public class Board {
         json.put("updateDate", FieldValue.serverTimestamp());
         json.put("imageUrl", imageUrl);
         json.put("phoneNum",phoneNum);
+        json.put("usersEmail", usersEmail);
         return json;
     }
     public void setUpdateDate(Long updateDate){

@@ -98,11 +98,11 @@ public class ModelFirebase {
         });
     }
 
-    public interface GetAllUsersListener{
+ /*   public interface GetAllUsersListener{
         void onComplete(List<User> usersList);
-    }
+    }*/
 
-    public void getAllUsers(Long lastUpdateDate, GetAllUsersListener listener) {
+    /*public void getAllUsers(Long lastUpdateDate, GetAllUsersListener listener) {
         db.collection(User.COLLECTION_NAME)
                 .get().addOnCompleteListener(task -> {
             List<User> list = new LinkedList<User>();
@@ -116,7 +116,7 @@ public class ModelFirebase {
             }
             listener.onComplete(list);
         });
-    }
+    }*/
     public void getUserByEmail(Model.getUserByEmail listener) {
         String userEmail = userAuth.getCurrentUser().getEmail();
         db.collection(User.COLLECTION_NAME).document(userEmail).get()
