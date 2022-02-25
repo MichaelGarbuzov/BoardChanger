@@ -81,7 +81,6 @@ public class User {
     public Long getUpdateDate() {
         return updateDate;
     }
-
     public void setImageUrl(String url) {
         imageUrl = url;
     }

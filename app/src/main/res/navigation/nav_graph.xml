@@ -51,4 +51,12 @@
             android:name="UserProfileData"
             android:defaultValue="User" />
     </action>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.boardchanger.editProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <action
+        android:id="@+id/action_global_editProfileFragment"
+        app:destination="@id/editProfileFragment" />
 </navigation>

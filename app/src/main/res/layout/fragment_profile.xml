@@ -38,4 +38,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+    <TextView
+        android:id="@+id/profile_member_since"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Member Since:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_email" />
+
+    <TextView
+        android:id="@+id/profile_member_since_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Member Since"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/profile_member_since"
+        app:layout_constraintTop_toBottomOf="@+id/profile_member_since" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

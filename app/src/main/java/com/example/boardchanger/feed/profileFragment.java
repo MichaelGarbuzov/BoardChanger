@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavHost;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,18 +19,24 @@ import android.widget.TextView;
 
 import com.example.boardchanger.R;
 import com.example.boardchanger.auth.LoginActivity;
+import com.example.boardchanger.model.BoardChangerLocalDB;
 import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.ModelFirebase;
 import com.example.boardchanger.model.users.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 
 public class profileFragment extends Fragment {
     ImageView profileImage;
-    TextView userName;
-    TextView userEmail;
+    TextView userName,userEmail, memSince, memSinceData;
 
     public profileFragment() {
         setHasOptionsMenu(true);
@@ -36,6 +44,7 @@ public class profileFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
@@ -46,8 +55,11 @@ public class profileFragment extends Fragment {
         User user = Model.instance.getUserByEmail( new Model.getUserByEmail() {
             @Override
             public void onComplete(User user) {
+                Date dateLong = new Date(user.getUpdateDate()*1000);
+                String date = dateLong.toString();
                 userEmail.setText(user.getEmail());
                 userName.setText(user.getName());
+                memSinceData.setText(date);
                 Picasso.get().load(user.getImageUrl()).into(profileImage);
             }
 
@@ -55,6 +67,8 @@ public class profileFragment extends Fragment {
         profileImage = view.findViewById(R.id.profile_image);
         userName = view.findViewById(R.id.profile_name);
         userEmail = view.findViewById(R.id.profile_email);
+        memSince = view.findViewById(R.id.profile_member_since);
+        memSinceData = view.findViewById(R.id.profile_member_since_data);
         return view;
     }
 
@@ -72,6 +86,7 @@ public class profileFragment extends Fragment {
                 case R.id.profile_menu_boards:
                     return true;
                 case R.id.profile_menu_edit:
+
                     return true;
             }
         }
