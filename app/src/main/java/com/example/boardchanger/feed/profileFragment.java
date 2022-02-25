@@ -1,12 +1,9 @@
 package com.example.boardchanger.feed;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavGraph;
-import androidx.navigation.NavHost;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,20 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.boardchanger.R;
-import com.example.boardchanger.auth.LoginActivity;
-import com.example.boardchanger.model.BoardChangerLocalDB;
 import com.example.boardchanger.model.Model;
-import com.example.boardchanger.model.ModelFirebase;
 import com.example.boardchanger.model.users.User;
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 public class profileFragment extends Fragment {
@@ -86,7 +74,6 @@ public class profileFragment extends Fragment {
                 case R.id.profile_menu_boards:
                     return true;
                 case R.id.profile_menu_edit:
-
                     return true;
             }
         }

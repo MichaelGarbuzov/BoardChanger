@@ -57,6 +57,12 @@ public class MainFeedActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     return true;
+                case R.id.profile_menu_edit:
+                    navCtl.navigate(R.id.action_global_editProfileFragment);
+                    return true;
+                case R.id.profile_menu_boards:
+                    navCtl.navigate(R.id.action_global_myBoardsFragment);
+                    return true;
             }
         }
         return true;

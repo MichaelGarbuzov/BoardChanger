@@ -52,11 +52,23 @@
             android:defaultValue="User" />
     </action>
     <fragment
-        android:id="@+id/editProfileFragment"
+        android:id="@+id/profile_menu_edit"
         android:name="com.example.boardchanger.editProfileFragment"
-        android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="UserEmailData"
+            app:argType="string" />
+    </fragment>
     <action
         android:id="@+id/action_global_editProfileFragment"
-        app:destination="@id/editProfileFragment" />
+        app:destination="@id/profile_menu_edit" />
+    <fragment
+        android:id="@+id/myBoardsFragment"
+        android:name="com.example.boardchanger.myBoardsFragment"
+        android:label="My Boards"
+        tools:layout="@layout/fragment_my_boards" />
+    <action
+        android:id="@+id/action_global_myBoardsFragment"
+        app:destination="@id/myBoardsFragment" />
 </navigation>

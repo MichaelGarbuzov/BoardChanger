@@ -1,64 +1,127 @@
 package com.example.boardchanger;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link editProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.users.User;
+import com.example.boardchanger.shared.ImageHandler;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
+import java.io.InputStream;
+import java.util.Date;
+
+
 public class editProfileFragment extends Fragment {
+    EditText userName, userPassword;
+    ImageView userImage, previewImage;
+    Button saveBtn;
+    Bitmap imageBitmap;
+    ProgressBar progressBar;
+    ImageButton camBtn, galleryBtn;
+    String imageCat = "/user_pictures/";
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_IMAGE_SELECTION =2;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public editProfileFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment editProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static editProfileFragment newInstance(String param1, String param2) {
-        editProfileFragment fragment = new editProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public editProfileFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        super.onCreate(savedInstanceState); }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        User user = Model.instance.getUserByEmail( new Model.getUserByEmail() {
+            @Override
+            public void onComplete(User user) {
+                Picasso.get().load(user.getImageUrl()).into(userImage);
+            }
+
+        });
+        userName = view.findViewById(R.id.edit_profile_name);
+        userPassword = view.findViewById(R.id.edit_profile_password);
+        userImage = view.findViewById(R.id.edit_profile_image);
+        camBtn = view.findViewById(R.id.edit_profile_take_image);
+        galleryBtn = view.findViewById(R.id.edit_profile_add_image);
+        saveBtn = view.findViewById(R.id.edit_profile_save_btn);
+        progressBar = view.findViewById(R.id.edit_profile_progressbar);
+        previewImage = view.findViewById(R.id.edit_profile_image_preview);
+        progressBar.setVisibility(View.GONE);
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save();
+            }
+        });
+        camBtn.setOnClickListener(v->{
+            Intent intent = ImageHandler.openCamera();
+            startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+
+        });
+
+        galleryBtn.setOnClickListener(v->{
+            Intent intent = ImageHandler.openGallery();
+            startActivityForResult(intent,REQUEST_IMAGE_SELECTION);
+        });
+
+        return view;
+    }
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_IMAGE_CAPTURE){
+            if(resultCode == Activity.RESULT_OK){
+                Bundle extras = data.getExtras();
+                imageBitmap = (Bitmap) extras.get("data");
+                previewImage.setImageBitmap(imageBitmap);
+            }
+        }else if(requestCode == REQUEST_IMAGE_SELECTION){
+            if(resultCode == RESULT_OK){
+                try{
+                    final Uri imageUri = data.getData();
+                    final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
+                    imageBitmap = BitmapFactory.decodeStream(imageStream);
+                    previewImage.setImageBitmap(imageBitmap);
+                }catch(Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),"Failed to select image",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
+
+    public void save() {
+        progressBar.setVisibility(View.VISIBLE);
+        saveBtn.setEnabled(false);
+        camBtn.setEnabled(false);
+        galleryBtn.setEnabled(false);
+        String name = userName.getText().toString();
+        String password = userPassword.getText().toString();
+        //TODO Implement the save changes!
     }
 }

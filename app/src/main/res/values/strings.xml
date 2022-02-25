@@ -43,4 +43,8 @@
     <string name="board_details_call">CALL</string>
     <string name="phone_number_add_board">Phone Number</string>
     <string name="addButton_list">addImage</string>
+    <string name="name_EP">New Name</string>
+    <string name="new_password_EP">New Password</string>
+    <string name="change_picture_EP">Change Picture</string>
+    <string name="save_changes_EP">Save Changes</string>
 </resources>
