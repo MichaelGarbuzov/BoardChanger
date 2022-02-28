@@ -16,18 +16,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.boardchanger.R;
-import com.example.boardchanger.model.posts.Board;
+import com.example.boardchanger.adapters.BoardsListAdapter;
 import com.example.boardchanger.model.Model;
 import com.example.boardchanger.model.posts.BoardsListViewModel;
-import com.squareup.picasso.Picasso;
 
 public class BoardsListFragment extends Fragment {
     BoardsListViewModel viewModel;
-    MyAdapter adapter;
+    BoardsListAdapter adapter;
     SwipeRefreshLayout swipeRefresh;
 
     public BoardsListFragment() {
@@ -52,7 +49,7 @@ public class BoardsListFragment extends Fragment {
         boardsList.setHasFixedSize(true);
         boardsList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new MyAdapter();
+        adapter = new BoardsListAdapter(viewModel.getData());
         boardsList.setAdapter(adapter);
 
         adapter.setOnItemClickListener((v, position) -> {
@@ -82,68 +79,4 @@ public class BoardsListFragment extends Fragment {
         swipeRefresh.setRefreshing(false);
     }
 
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView boardName;
-        TextView boardPrice;
-        TextView boardYear;
-        ImageView boardImage;
-
-        public MyViewHolder(View itemView, OnItemClickListener listener) {
-            super(itemView);
-            boardName = itemView.findViewById(R.id.listrow_board_name);
-            boardYear = itemView.findViewById(R.id.listrow_board_year);
-            boardPrice = itemView.findViewById(R.id.listrow_board_price);
-            boardImage = itemView.findViewById(R.id.listrow_image_v);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    listener.onItemClick(v, pos);
-                }
-            });
-        }
-
-        public void bind(Board board) {
-            boardName.setText(board.getName());
-            boardYear.setText(board.getYear());
-            boardPrice.setText(board.getPrice());
-            boardImage.setImageResource(R.drawable.board);
-            Picasso.get().load(board.getImageUrl()).into(boardImage);
-        }
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(View v, int position);
-    }
-
-    class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
-        OnItemClickListener listener;
-
-        public void setOnItemClickListener(OnItemClickListener listener) {
-            this.listener = listener;
-        }
-
-        @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.list_row, parent, false);
-            MyViewHolder holder = new MyViewHolder(view, listener);
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            Board board = viewModel.getData().getValue().get(position);
-            holder.bind(board);
-        }
-
-        @Override
-        public int getItemCount() {
-            if (viewModel.getData().getValue() == null) {
-                return 0;
-            }
-            return viewModel.getData().getValue().size();
-        }
-    }
 }
