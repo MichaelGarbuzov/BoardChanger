@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.boardchanger.model.users.User;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
@@ -39,8 +40,8 @@ public class Board {
         return usersEmail;
     }
 
-    public void setUser() {
-        this.usersEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    public void setUser(String userEmail) {
+        this.usersEmail = userEmail;
     }
 
     public Board() {}
@@ -67,7 +68,7 @@ public class Board {
        board.setPhoneNum(phoneNum);
        board.setUpdateDate(updateDate);
        board.setImageUrl(imageUrl);
-       board.setUser();
+       board.setUser(json.get("usersEmail").toString());
        return board;
     }
 

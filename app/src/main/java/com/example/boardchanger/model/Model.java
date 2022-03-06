@@ -12,8 +12,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.boardchanger.MyApplication;
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.users.User;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -23,6 +25,20 @@ public class Model {
     Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
     ModelFirebase modelFirebase = new ModelFirebase();
     private Model(){
+    }
+
+    public interface UpdateUserNameListener{
+        void onComplete();
+    }
+
+    public void updateUserName(String name) {
+
+        modelFirebase.updateUserName(name);
+
+    }
+
+    public void updateUserPassword(String password) {
+        modelFirebase.updateUserPassword(password);
     }
 
     public interface SaveImageListener{
@@ -99,7 +115,7 @@ public class Model {
         });
     }
 
-    public interface AddUserListener{
+    public interface CompleteListener {
         void onComplete();
     }
 
@@ -112,12 +128,16 @@ public class Model {
         return null;
     }
 
-    public void addUser(User user, AddUserListener listener){
-        modelFirebase.addUser(user, new AddUserListener() {
+    public void addUser(User user, CompleteListener listener){
+        modelFirebase.addUser(user, new CompleteListener() {
             @Override
             public void onComplete() {
                 listener.onComplete();
             }
         });
+    }
+
+    public void updateUser(Map<String, Object> userMap, Bitmap imageBitMap,CompleteListener listener) {
+        modelFirebase.update(userMap, imageBitMap ,listener);
     }
 }

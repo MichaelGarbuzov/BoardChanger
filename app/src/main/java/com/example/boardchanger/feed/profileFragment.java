@@ -66,17 +66,4 @@ public class profileFragment extends Fragment {
         inflater.inflate(R.menu.profile_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (!super.onOptionsItemSelected(item)) {
-            switch (item.getItemId()) {
-                case R.id.profile_menu_boards:
-                    return true;
-                case R.id.profile_menu_edit:
-                    return true;
-            }
-        }
-        return true;
-    }
 }

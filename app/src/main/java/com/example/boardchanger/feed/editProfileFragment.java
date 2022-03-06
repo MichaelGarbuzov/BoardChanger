@@ -1,4 +1,4 @@
-package com.example.boardchanger;
+package com.example.boardchanger.feed;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -11,6 +11,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.boardchanger.R;
 import com.example.boardchanger.model.Model;
 import com.example.boardchanger.model.users.User;
 import com.example.boardchanger.shared.ImageHandler;
@@ -31,6 +35,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class editProfileFragment extends Fragment {
@@ -122,6 +128,23 @@ public class editProfileFragment extends Fragment {
         galleryBtn.setEnabled(false);
         String name = userName.getText().toString();
         String password = userPassword.getText().toString();
-        //TODO Implement the save changes!
+
+        Map<String, Object> userMap = User.getInstance().toJson();
+
+        if(!name.isEmpty()) {
+          userMap.put("name", name);
+        }
+
+        if(!password.isEmpty()) {
+            userMap.put("password", password);
+        }
+
+        Fragment thisFragment = this;
+        Model.instance.updateUser(userMap, imageBitmap,new Model.CompleteListener() {
+            @Override
+            public void onComplete() {
+                NavHostFragment.findNavController(thisFragment).popBackStack();
+            }
+        });
     }
 }

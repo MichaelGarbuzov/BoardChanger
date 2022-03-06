@@ -2,12 +2,23 @@ package com.example.boardchanger.model;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
+import android.view.Display;
+
+import androidx.annotation.NonNull;
 
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.users.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -23,11 +34,22 @@ public class ModelFirebase {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseAuth userAuth = FirebaseAuth.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    DatabaseReference userDb = FirebaseDatabase.getInstance().getReference("users");
+    User user = null;
 
     public ModelFirebase() {
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(false).build();
         db.setFirestoreSettings(settings);
+    }
+
+    public void updateUserName(String newName) {
+        DocumentReference userRef = db.collection(User.COLLECTION_NAME).document(userAuth.getCurrentUser().getEmail());
+        userRef.update("name", newName);
+    }
+
+    public void updateUserPassword(String password) {
+        userAuth.getCurrentUser().updatePassword(password);
     }
 
 
@@ -98,25 +120,7 @@ public class ModelFirebase {
         });
     }
 
- /*   public interface GetAllUsersListener{
-        void onComplete(List<User> usersList);
-    }*/
 
-    /*public void getAllUsers(Long lastUpdateDate, GetAllUsersListener listener) {
-        db.collection(User.COLLECTION_NAME)
-                .get().addOnCompleteListener(task -> {
-            List<User> list = new LinkedList<User>();
-            if (task.isSuccessful()) {
-                for (QueryDocumentSnapshot doc : task.getResult()) {
-                    User user = User.create(doc.getData());
-                    if (user != null) {
-                        list.add(user);
-                    }
-                }
-            }
-            listener.onComplete(list);
-        });
-    }*/
     public void getUserByEmail(Model.getUserByEmail listener) {
         String userEmail = userAuth.getCurrentUser().getEmail();
         db.collection(User.COLLECTION_NAME).document(userEmail).get()
@@ -131,7 +135,7 @@ public class ModelFirebase {
 
     }
 
-    public void addUser(User user, Model.AddUserListener listener) {
+    public void addUser(User user, Model.CompleteListener listener) {
         Map<String, Object> json = user.toJson();
 
         db.collection(User.COLLECTION_NAME)
@@ -140,5 +144,31 @@ public class ModelFirebase {
                 .addOnSuccessListener(unused -> listener.onComplete())
                 .addOnFailureListener(e -> listener.onComplete());
 
+    }
+
+    public void update(Map<String, Object> userMap, Bitmap imageBitMap ,Model.CompleteListener listener) {
+        DocumentReference userRef = db.collection(User.COLLECTION_NAME).document(userMap.get("email").toString());
+
+        if(imageBitMap != null) {
+            saveImage(imageBitMap, userMap.get("name") + ".jpg", "/user_pictures/", new Model.SaveImageListener() {
+                @Override
+                public void onComplete(String url) {
+                    userMap.put("imageUrl", url);
+                    userRef.update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            listener.onComplete();
+                        }
+                    });
+                }
+            });
+        } else {
+            userRef.update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    listener.onComplete();
+                }
+            });
+        }
     }
 }

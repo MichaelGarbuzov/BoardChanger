@@ -47,4 +47,6 @@
     <string name="new_password_EP">New Password</string>
     <string name="change_picture_EP">Change Picture</string>
     <string name="save_changes_EP">Save Changes</string>
+    <string name="user_boards_title">My Boards</string>
+
 </resources>

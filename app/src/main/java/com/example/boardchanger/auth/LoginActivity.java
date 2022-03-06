@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.boardchanger.R;
 import com.example.boardchanger.feed.MainFeedActivity;
+import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.users.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -82,6 +84,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Intent feed = new Intent(LoginActivity.this, MainFeedActivity.class);
+                    Model.instance.getUserByEmail(new Model.getUserByEmail() {
+                        @Override
+                        public void onComplete(User user) { }
+                    });
                     startActivity(feed);
                     finish();
                 }else{

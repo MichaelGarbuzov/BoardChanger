@@ -25,17 +25,16 @@
         <action
             android:id="@+id/action_boardsListFragment_to_addBoardFragment"
             app:destination="@id/addBoardFragment" />
+        <argument
+            android:name="onlyUserBoard"
+            android:defaultValue="false"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/addBoardFragment"
         android:name="com.example.boardchanger.feed.AddBoardFragment"
         android:label="Add Board"
         tools:layout="@layout/fragment_add_board" />
-    <fragment
-        android:id="@+id/sendMessageFragment"
-        android:name="com.example.boardchanger.feed.SendMessageFragment"
-        android:label="Send Message"
-        tools:layout="@layout/fragment_send_message" />
     <fragment
         android:id="@+id/menuProfileFragment"
         android:name="com.example.boardchanger.feed.profileFragment"
@@ -45,6 +44,15 @@
             android:name="UserProfileData"
             app:argType="string"
             app:nullable="true" />
+
+        <action
+            android:id="@+id/action_global_myBoardsFragment"
+            app:destination="@id/boardsListFragment" >
+            <argument
+                android:name="onlyUserBoard"
+                android:defaultValue="true" />
+        </action>
+
     </fragment>
     <action android:id="@+id/action_global_profileFragment" app:destination="@id/menuProfileFragment" >
         <argument
@@ -53,7 +61,7 @@
     </action>
     <fragment
         android:id="@+id/profile_menu_edit"
-        android:name="com.example.boardchanger.editProfileFragment"
+        android:name="com.example.boardchanger.feed.editProfileFragment"
         android:label="Edit Profile"
         tools:layout="@layout/fragment_edit_profile" >
         <argument
@@ -63,12 +71,5 @@
     <action
         android:id="@+id/action_global_editProfileFragment"
         app:destination="@id/profile_menu_edit" />
-    <fragment
-        android:id="@+id/myBoardsFragment"
-        android:name="com.example.boardchanger.myBoardsFragment"
-        android:label="My Boards"
-        tools:layout="@layout/fragment_my_boards" />
-    <action
-        android:id="@+id/action_global_myBoardsFragment"
-        app:destination="@id/myBoardsFragment" />
+
 </navigation>

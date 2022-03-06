@@ -48,7 +48,6 @@ public class RegistrationActivity extends AppCompatActivity {
     ProgressBar progressBar;
     Bitmap imageBitmap = null;
     String imageCat = "/user_pictures/";
-    User user;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_SELECTION = 2;
@@ -132,12 +131,12 @@ public class RegistrationActivity extends AppCompatActivity {
                             userEmail = regEmail.getText().toString();
                             userName = regName.getText().toString();
                             userPassword = regPwd.getText().toString();
-                            user = new User(userEmail, userName, userPassword);
+                            User.getInstance().setUserDetails(userEmail, userName, userPassword);
                             if(imageBitmap != null){
                             Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
-                                user.setImageUrl(url);
+                                User.getInstance().setImageUrl(url);
                                     });}
-                                Model.instance.addUser(user, () -> {
+                                Model.instance.addUser(User.getInstance(), () -> {
                                     Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                     Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
                                     startActivity(feed);

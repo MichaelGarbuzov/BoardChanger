@@ -12,6 +12,7 @@ import java.util.Map;
 
 @Entity
 public class User {
+    public static User user = new User();
     final public static String COLLECTION_NAME = "users";
     @PrimaryKey
     @NonNull
@@ -20,8 +21,16 @@ public class User {
     String imageUrl;
     String password;
     Long updateDate = new Long(0);
-    //Board[] posts;
-    public User(String email, String name, String password){
+
+    public static User getInstance()
+    {
+        if (user == null)
+            user = new User();
+
+        return user;
+    }
+
+    public void setUserDetails(String email, String name, String password){
         this.email = email;
         this.name = name;
         this.password = password;
@@ -70,7 +79,7 @@ public class User {
         Timestamp ts = (Timestamp)json.get("updateDate");
         Long updateDate = ts.getSeconds();
         String imageUrl = (String)json.get("imageUrl");
-        User user = new User(email, name, password);
+        user.setUserDetails(email, name, password);
         user.setUpdateDate(updateDate);
         user.setImageUrl(imageUrl);
         return user;

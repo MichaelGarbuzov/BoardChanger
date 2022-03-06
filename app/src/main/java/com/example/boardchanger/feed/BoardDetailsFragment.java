@@ -69,9 +69,6 @@ public class BoardDetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-       /* Button sendMsg = view.findViewById(R.id.board_details_call_btn);
-        sendMsg.setOnClickListener(Navigation.createNavigateOnClickListener(
-                BoardDetailsFragmentDirections.actionBoardDetailsFragmentToSendMessageFragment()));*/
         return view;
     }
 }

@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.boardchanger.R;
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.users.User;
 import com.example.boardchanger.shared.ImageHandler;
 
 import java.io.InputStream;
@@ -147,7 +148,7 @@ public class AddBoardFragment extends Fragment {
         String address = boardAddress.getText().toString();
         Board board = new Board(name, year, price, desc, address);
         board.setPhoneNum(phoneNum);
-        board.setUser();
+        board.setUser(User.getInstance().getEmail());
         Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
             board.setImageUrl(url);
             Model.instance.addBoard(board, () -> {
