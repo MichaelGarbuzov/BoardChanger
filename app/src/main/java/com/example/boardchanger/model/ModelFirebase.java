@@ -142,39 +142,18 @@ public class ModelFirebase {
         final String email = user.getEmail();
         String oldPass = User.getInstance().getPassword();
         AuthCredential credential = EmailAuthProvider.getCredential(email, oldPass);
-        authenticateUser(credential, new AuthenticateUserListener() {
-            @Override
-            public void onSuccess() {
-                user.updatePassword(userMap.get("password").toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()) {
-                            if(imageBitMap != null) {
-                                saveImage(imageBitMap, userMap.get("name") + ".jpg", "/user_pictures/", new Model.SaveImageListener() {
-                                    @Override
-                                    public void onComplete(String url) {
-                                        userMap.put("imageUrl", url);
-                                        userRef.update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                listener.onComplete();
-                                            }
-                                        });
-                                    }
-                                });
-                            } else {
-                                userRef.update(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        listener.onComplete();
-                                    }
-                                });
-                            }
-                        }
-                    }
-                });
+        authenticateUser(credential, () -> user.updatePassword(userMap.get("password").toString()).addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                if(imageBitMap != null) {
+                    saveImage(imageBitMap, userMap.get("name") + ".jpg", "/user_pictures/", url -> {
+                        userMap.put("imageUrl", url);
+                        userRef.update(userMap).addOnCompleteListener(task1 -> listener.onComplete());
+                    });
+                } else {
+                    userRef.update(userMap).addOnCompleteListener(task12 -> listener.onComplete());
+                }
             }
-        });
+        }));
     }
 
     private interface AuthenticateUserListener {
