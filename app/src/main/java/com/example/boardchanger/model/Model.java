@@ -2,17 +2,13 @@ package com.example.boardchanger.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Looper;
 
-import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.boardchanger.MyApplication;
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.users.User;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 import java.util.Map;
@@ -22,23 +18,8 @@ import java.util.concurrent.Executors;
 public class Model {
     public final static Model instance = new Model();
     Executor executor =Executors.newFixedThreadPool(1);
-    Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
     ModelFirebase modelFirebase = new ModelFirebase();
     private Model(){
-    }
-
-    public interface UpdateUserNameListener{
-        void onComplete();
-    }
-
-    public void updateUserName(String name) {
-
-        modelFirebase.updateUserName(name);
-
-    }
-
-    public void updateUserPassword(String password) {
-        modelFirebase.updateUserPassword(password);
     }
 
     public interface SaveImageListener{
@@ -138,6 +119,6 @@ public class Model {
     }
 
     public void updateUser(Map<String, Object> userMap, Bitmap imageBitMap,CompleteListener listener) {
-        modelFirebase.update(userMap, imageBitMap ,listener);
+        modelFirebase.updateUser(userMap, imageBitMap ,listener);
     }
 }

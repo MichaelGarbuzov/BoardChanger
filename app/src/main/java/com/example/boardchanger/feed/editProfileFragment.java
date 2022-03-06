@@ -143,6 +143,7 @@ public class editProfileFragment extends Fragment {
         Model.instance.updateUser(userMap, imageBitmap,new Model.CompleteListener() {
             @Override
             public void onComplete() {
+                Model.instance.getUserByEmail(user -> { });
                 NavHostFragment.findNavController(thisFragment).popBackStack();
             }
         });

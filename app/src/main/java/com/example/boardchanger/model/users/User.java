@@ -72,7 +72,7 @@ public class User {
         return json;
     }
 
-    public static User create(Map<String, Object> json) {
+    public User create(Map<String, Object> json) {
         String email = (String) json.get("email");
         String name = (String) json.get("name");
         String password = (String) json.get("password");
