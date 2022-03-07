@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import com.example.boardchanger.R;
 import com.example.boardchanger.adapters.BoardsListAdapter;
 import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.posts.BoardsListViewModel;
 
 public class BoardsListFragment extends Fragment {
@@ -64,14 +65,20 @@ public class BoardsListFragment extends Fragment {
         boardsList.setAdapter(adapter);
 
         adapter.setOnItemClickListener((v, position) -> {
-            String boardName = viewModel.getData().getValue().get(position).getName();
-            Navigation.findNavController(v).navigate(
-                    BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardName));
+            if(isOnlyUserBoards) {
+                String boardID = viewModel.getData().getValue().get(position).getId();
+                Navigation.findNavController(v).navigate(
+                        BoardsListFragmentDirections.actionBoardsListFragmentToEditBoardFragment(boardID));
+            } else {
+                String boardID = viewModel.getData().getValue().get(position).getId();
+                Navigation.findNavController(v).navigate(
+                        BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardID));
+            }
         });
         add = view.findViewById(R.id.boards_add_btn);
 
         add.setOnClickListener(Navigation.createNavigateOnClickListener(
-                BoardsListFragmentDirections.actionBoardsListFragmentToAddBoardFragment()));
+                BoardsListFragmentDirections.actionBoardsListFragmentToAddBoardFragment(null)));
 
         viewModel.getData().observe(getViewLifecycleOwner(), boardList -> refresh());
         swipeRefresh.setRefreshing(Model.instance.getBoardListLoadingState().getValue() ==

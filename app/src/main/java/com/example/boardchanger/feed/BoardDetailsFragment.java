@@ -40,8 +40,8 @@ public class BoardDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_board_details, container, false);
-        String boardNameData = BoardDetailsFragmentArgs.fromBundle(getArguments()).getBoardNameData();
-        Board board = Model.instance.getBoardByName(boardNameData, new Model.getBoardByName() {
+        String boardID = BoardDetailsFragmentArgs.fromBundle(getArguments()).getBoardID();
+        Model.instance.getBoardByID(boardID, new Model.getBoardByID() {
             @Override
             public void onComplete(Board board) {
                 boardName.setText(board.getName());

@@ -68,20 +68,19 @@ public class ModelFirebase {
         Map<String, Object> json = board.toJson();
 
         db.collection(Board.COLLECTION_NAME)
-                .document(board.getName())
+                .document(board.getId())
                 .set(json)
                 .addOnSuccessListener(unused -> listener.onComplete())
                 .addOnFailureListener(e -> listener.onComplete());
 
     }
 
-    public void getBoardByName(String boardName, Model.getBoardByName listener) {
-        db.collection(Board.COLLECTION_NAME).document(boardName).get()
+    public void getBoardByID(String boardID, Model.getBoardByID listener) {
+            db.collection(Board.COLLECTION_NAME).document(boardID).get()
                 .addOnCompleteListener(task -> {
                     Board board = null;
                     if (task.isSuccessful() & task.getResult() != null) {
                         board = Board.create(task.getResult().getData());
-
                     }
                     listener.onComplete(board);
                 });
@@ -128,13 +127,11 @@ public class ModelFirebase {
 
     public void addUser(User user, Model.CompleteListener listener) {
         Map<String, Object> json = user.toJson();
-
         db.collection(User.COLLECTION_NAME)
                 .document(user.getEmail())
                 .set(json)
                 .addOnSuccessListener(unused -> listener.onComplete())
                 .addOnFailureListener(e -> listener.onComplete());
-
     }
 
     public void updateUser(Map<String, Object> userMap, Bitmap imageBitMap, Model.CompleteListener listener) {

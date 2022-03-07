@@ -77,12 +77,12 @@ public class Model {
         void onComplete();
     }
 
-    public interface getBoardByName{
+    public interface getBoardByID{
         void onComplete(Board board);
     }
 
-    public Board getBoardByName(String boardName, getBoardByName listener){
-        modelFirebase.getBoardByName(boardName, listener);
+    public Board getBoardByID(String boardID, getBoardByID listener){
+        modelFirebase.getBoardByID(boardID, listener);
         return null;
     }
 

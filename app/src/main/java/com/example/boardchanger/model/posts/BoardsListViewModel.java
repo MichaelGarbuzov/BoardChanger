@@ -20,6 +20,7 @@ public class BoardsListViewModel extends ViewModel {
     }
 
     private Boolean isUserBoardsOnly;
+    private MutableLiveData<List<Board>> boardsList = new MutableLiveData();
 
     public LiveData<List<Board>> getData() {
 
@@ -33,7 +34,6 @@ public class BoardsListViewModel extends ViewModel {
                 }
             }
 
-            MutableLiveData<List<Board>> boardsList = new MutableLiveData<List<Board>>();
             boardsList.postValue(onlyUserBoard);
             return boardsList;
         }

@@ -50,7 +50,6 @@ public class editProfileFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_SELECTION =2;
 
-
     public editProfileFragment() { }
 
     @Override

@@ -11,7 +11,7 @@
         android:label="Board Details"
         tools:layout="@layout/fragment_board_details">
         <argument
-            android:name="BoardNameData"
+            android:name="boardID"
             app:argType="string" />
     </fragment>
     <fragment
@@ -24,17 +24,38 @@
             app:destination="@id/boardDetailsFragment" />
         <action
             android:id="@+id/action_boardsListFragment_to_addBoardFragment"
-            app:destination="@id/addBoardFragment" />
+            app:destination="@id/addBoardFragment" >
+            <argument
+                android:name="isEditMode"
+                android:defaultValue="false" />
+        </action>
         <argument
             android:name="onlyUserBoard"
             android:defaultValue="false"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_boardsListFragment_to_editBoardFragment"
+            app:destination="@id/addBoardFragment" >
+            <argument
+                android:name="isEditMode"
+                android:defaultValue="true" />
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/addBoardFragment"
         android:name="com.example.boardchanger.feed.AddBoardFragment"
         android:label="Add Board"
-        tools:layout="@layout/fragment_add_board" />
+        tools:layout="@layout/fragment_add_board" >
+        <argument
+            android:name="isEditMode"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="boardID"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
     <fragment
         android:id="@+id/menuProfileFragment"
         android:name="com.example.boardchanger.feed.profileFragment"

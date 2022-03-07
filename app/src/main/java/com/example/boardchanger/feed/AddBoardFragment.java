@@ -43,12 +43,13 @@ public class AddBoardFragment extends Fragment {
     Button addBoard;
     ProgressBar progressBar;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_IMAGE_SELECTION =2;
+    static final int REQUEST_IMAGE_SELECTION = 2;
     Bitmap imageBitmap;
     ImageView boardP;
     ImageButton galleryBtn;
     ImageButton camBtn;
     String imageCat = "/board_pictures/";
+    Boolean isEditMode = false;
 
     public AddBoardFragment() {
         // Required empty public constructor
@@ -69,7 +70,7 @@ public class AddBoardFragment extends Fragment {
         boardP = view.findViewById(R.id.add_board_image_preview);
         boardPhoneNum = view.findViewById(R.id.add_board_phone_num);
 
-
+        isEditMode =  AddBoardFragmentArgs.fromBundle(getArguments()).getIsEditMode();
 
         addBoard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,15 +82,15 @@ public class AddBoardFragment extends Fragment {
         camBtn = view.findViewById(R.id.add_board_take_image_btn);
         galleryBtn = view.findViewById(R.id.add_board_add_image_btn);
 
-       camBtn.setOnClickListener(v->{
+        camBtn.setOnClickListener(v -> {
             Intent intent = ImageHandler.openCamera();
-           startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
 
-       });
+        });
 
-        galleryBtn.setOnClickListener(v->{
+        galleryBtn.setOnClickListener(v -> {
             Intent intent = ImageHandler.openGallery();
-            startActivityForResult(intent,REQUEST_IMAGE_SELECTION);
+            startActivityForResult(intent, REQUEST_IMAGE_SELECTION);
         });
         return view;
     }
@@ -97,23 +98,23 @@ public class AddBoardFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_IMAGE_CAPTURE){
-            if(resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == Activity.RESULT_OK) {
                 Bundle extras = data.getExtras();
                 imageBitmap = (Bitmap) extras.get("data");
                 boardP.setImageBitmap(imageBitmap);
             }
-        }else if(requestCode == REQUEST_IMAGE_SELECTION){
-            if(resultCode == RESULT_OK){
-               try{
-                final Uri imageUri = data.getData();
-                final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
-                imageBitmap = BitmapFactory.decodeStream(imageStream);
-                boardP.setImageBitmap(imageBitmap);
-            }catch(Exception e){
-                   e.printStackTrace();
-                   Toast.makeText(getActivity(),"Failed to select image",Toast.LENGTH_LONG).show();
-               }
+        } else if (requestCode == REQUEST_IMAGE_SELECTION) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    final Uri imageUri = data.getData();
+                    final InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
+                    imageBitmap = BitmapFactory.decodeStream(imageStream);
+                    boardP.setImageBitmap(imageBitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Failed to select image", Toast.LENGTH_LONG).show();
+                }
             }
         }
 
@@ -149,7 +150,7 @@ public class AddBoardFragment extends Fragment {
         Board board = new Board(name, year, price, desc, address);
         board.setPhoneNum(phoneNum);
         board.setUser(User.getInstance().getEmail());
-        Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
+        Model.instance.saveImage(imageBitmap, name + ".jpg", imageCat, url -> {
             board.setImageUrl(url);
             Model.instance.addBoard(board, () -> {
                 Navigation.findNavController(boardName).navigateUp();

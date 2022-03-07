@@ -11,18 +11,20 @@ import com.google.firebase.firestore.FieldValue;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Entity
 public class Board {
     final public static String COLLECTION_NAME = "boards";
     @PrimaryKey
     @NonNull
-    String name="";
+    String boardID = UUID.randomUUID().toString();
+    String name = "";
     String usersEmail;
-    String price="";
-    String description="";
-    String year="";
-    String address="";
+    String price = "";
+    String description = "";
+    String year = "";
+    String address = "";
     String imageUrl;
     static String phoneNum;
     Long updateDate = new Long(0);
@@ -32,11 +34,15 @@ public class Board {
         return phoneNum;
     }
 
+    public String getId() {
+        return boardID;
+    }
+
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 
-     public String getUser() {
+    public String getUser() {
         return usersEmail;
     }
 
@@ -44,32 +50,35 @@ public class Board {
         this.usersEmail = userEmail;
     }
 
-    public Board() {}
+    public Board() {
+    }
 
-    public Board(String name, String year, String price, String description,String address) {
+    public Board(String name, String year, String price, String description, String address) {
         this.name = name;
         this.year = year;
         this.price = price;
-       this.description = description;
-       this.address = address;
+        this.description = description;
+        this.address = address;
     }
 
     public static Board create(Map<String, Object> json) {
-       String name = (String) json.get("name");
-       String year = (String) json.get("year");
-       String price = (String) json.get("price");
-       String description = (String) json.get("description");
-       String address = (String) json.get("address");
-       Timestamp ts = (Timestamp)json.get("updateDate");
-       Long updateDate = ts.getSeconds();
-       String imageUrl = (String)json.get("imageUrl");
-       String phoneNum = (String)json.get("phoneNum");
-       Board board = new Board(name, year, price, description, address);
-       board.setPhoneNum(phoneNum);
-       board.setUpdateDate(updateDate);
-       board.setImageUrl(imageUrl);
-       board.setUser(json.get("usersEmail").toString());
-       return board;
+        String boardID = (String) json.get("boardID");
+        String name = (String) json.get("name");
+        String year = (String) json.get("year");
+        String price = (String) json.get("price");
+        String description = (String) json.get("description");
+        String address = (String) json.get("address");
+        Timestamp ts = (Timestamp) json.get("updateDate");
+        Long updateDate = ts.getSeconds();
+        String imageUrl = (String) json.get("imageUrl");
+        String phoneNum = (String) json.get("phoneNum");
+        Board board = new Board(name, year, price, description, address);
+        board.setPhoneNum(phoneNum);
+        board.setUpdateDate(updateDate);
+        board.setImageUrl(imageUrl);
+        board.setUser(json.get("usersEmail").toString());
+        board.boardID = boardID;
+        return board;
     }
 
     public void setAddress(String address) {
@@ -93,9 +102,9 @@ public class Board {
     }
 
 
-   public void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
-  }
+    }
 
 
     public String getName() {
@@ -116,6 +125,7 @@ public class Board {
 
     public Map<String, Object> toJson() {
         Map<String, Object> json = new HashMap<String, Object>();
+        json.put("boardID", boardID);
         json.put("name", name);
         json.put("year", year);
         json.put("price", price);
@@ -123,13 +133,15 @@ public class Board {
         json.put("address", address);
         json.put("updateDate", FieldValue.serverTimestamp());
         json.put("imageUrl", imageUrl);
-        json.put("phoneNum",phoneNum);
+        json.put("phoneNum", phoneNum);
         json.put("usersEmail", usersEmail);
         return json;
     }
-    public void setUpdateDate(Long updateDate){
+
+    public void setUpdateDate(Long updateDate) {
         this.updateDate = updateDate;
     }
+
     public Long getUpdateDate() {
         return updateDate;
     }
@@ -138,6 +150,7 @@ public class Board {
         imageUrl = url;
 
     }
+
     public String getImageUrl() {
         return imageUrl;
     }
