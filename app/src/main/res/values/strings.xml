@@ -48,5 +48,7 @@
     <string name="change_picture_EP">Change Picture</string>
     <string name="save_changes_EP">Save Changes</string>
     <string name="user_boards_title">My Boards</string>
+    <string name="edit_board_title">Edit Board</string>
+    <string name="delete_EB">Delete</string>
 
 </resources>

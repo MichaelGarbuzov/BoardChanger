@@ -9,11 +9,15 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,6 +32,7 @@ import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.Model;
 import com.example.boardchanger.model.users.User;
 import com.example.boardchanger.shared.ImageHandler;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 
@@ -40,8 +45,9 @@ public class AddBoardFragment extends Fragment {
     EditText boardAddress;
     EditText boardYear;
     EditText boardPhoneNum;
-    Button addBoard;
+    Button addBoard, deleteBoard;
     ProgressBar progressBar;
+    String boardID;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_SELECTION = 2;
     Bitmap imageBitmap;
@@ -50,6 +56,7 @@ public class AddBoardFragment extends Fragment {
     ImageButton camBtn;
     String imageCat = "/board_pictures/";
     Boolean isEditMode = false;
+    Board currentBoard;
 
     public AddBoardFragment() {
         // Required empty public constructor
@@ -69,19 +76,41 @@ public class AddBoardFragment extends Fragment {
         progressBar.setVisibility(View.GONE);
         boardP = view.findViewById(R.id.add_board_image_preview);
         boardPhoneNum = view.findViewById(R.id.add_board_phone_num);
-
-        isEditMode =  AddBoardFragmentArgs.fromBundle(getArguments()).getIsEditMode();
+        deleteBoard = view.findViewById(R.id.edit_board_delete_btn);
+        deleteBoard.setVisibility(View.GONE);
+        isEditMode = AddBoardFragmentArgs.fromBundle(getArguments()).getIsEditMode();
+        boardID = AddBoardFragmentArgs.fromBundle(getArguments()).getBoardID();
 
         addBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add();
+                if (isEditMode) {
+                    editBoard();
+                } else {
+                    add();
+                }
             }
         });
 
         camBtn = view.findViewById(R.id.add_board_take_image_btn);
         galleryBtn = view.findViewById(R.id.add_board_add_image_btn);
-
+        if (boardID != null) {
+            showProgressBar(true);
+            Model.instance.getBoardByID(boardID, new Model.getBoardByID() {
+                @Override
+                public void onComplete(Board board) {
+                    showProgressBar(false);
+                    currentBoard = board;
+                    boardName.setText(board.getName());
+                    boardDesc.setText(board.getDescription());
+                    boardPrice.setText(board.getPrice());
+                    boardAddress.setText(board.getAddress());
+                    boardYear.setText(board.getYear());
+                    boardPhoneNum.setText(Board.getPhoneNum());
+                    Picasso.get().load(board.getImageUrl()).into(boardP);
+                }
+            });
+        }
         camBtn.setOnClickListener(v -> {
             Intent intent = ImageHandler.openCamera();
             startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
@@ -91,6 +120,26 @@ public class AddBoardFragment extends Fragment {
         galleryBtn.setOnClickListener(v -> {
             Intent intent = ImageHandler.openGallery();
             startActivityForResult(intent, REQUEST_IMAGE_SELECTION);
+        });
+
+        Fragment thisFrag = this;
+        deleteBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgressBar(true);
+                Model.instance.deleteBoard(currentBoard, new Model.CompleteListener() {
+                    @Override
+                    public void onComplete() {
+                        thisFrag.getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showProgressBar(false);
+                                NavHostFragment.findNavController(thisFrag).navigateUp();
+                            }
+                        });
+                    }
+                });
+            }
         });
         return view;
     }
@@ -120,26 +169,26 @@ public class AddBoardFragment extends Fragment {
 
     }
 
-    private void add() {
-        progressBar.setVisibility(View.VISIBLE);
-        addBoard.setEnabled(false);
+    private Boolean validate() {
+        Boolean valid = true;
         if (boardYear.getText().toString().equals("") || boardDesc.getText().toString().equals("") ||
                 boardName.getText().toString().equals("") || boardPrice.getText().toString().equals("") ||
                 boardAddress.getText().toString().equals("") || boardPhoneNum.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "All Fields Must be Filled!", Toast.LENGTH_LONG).show();
-            progressBar.setVisibility(View.GONE);
-            addBoard.setEnabled(true);
-            return;
+            valid = false;
         }
+        return valid;
+    }
 
-        if (imageBitmap == null) {
-            Toast.makeText(getActivity(), "You Must Add A Board Image!", Toast.LENGTH_LONG).show();
-            progressBar.setVisibility(View.GONE);
-            addBoard.setEnabled(true);
-            return;
-        }
-        camBtn.setEnabled(false);
-        galleryBtn.setEnabled(false);
+    private void showProgressBar(Boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE: View.GONE);
+        addBoard.setEnabled(!show);
+        camBtn.setEnabled(!show);
+        galleryBtn.setEnabled(!show);
+        deleteBoard.setEnabled(!show);
+    }
+
+    private Board createBoardFromDetails() {
 
         String name = boardName.getText().toString();
         String price = boardPrice.getText().toString();
@@ -147,14 +196,69 @@ public class AddBoardFragment extends Fragment {
         String year = boardYear.getText().toString();
         String phoneNum = boardPhoneNum.getText().toString();
         String address = boardAddress.getText().toString();
-        Board board = new Board(name, year, price, desc, address);
-        board.setPhoneNum(phoneNum);
-        board.setUser(User.getInstance().getEmail());
-        Model.instance.saveImage(imageBitmap, name + ".jpg", imageCat, url -> {
-            board.setImageUrl(url);
-            Model.instance.addBoard(board, () -> {
-                Navigation.findNavController(boardName).navigateUp();
+
+        if(isEditMode && currentBoard != null) {
+            currentBoard.setName(name);
+            currentBoard.setPrice(price);
+            currentBoard.setDescription(desc);
+            currentBoard.setYear(year);
+            currentBoard.setPhoneNum(phoneNum);
+            currentBoard.setAddress(address);
+            return currentBoard;
+        } else {
+            Board board = new Board(name, year, price, desc, address);
+            board.setPhoneNum(phoneNum);
+            board.setUser(User.getInstance().getEmail());
+            return board;
+        }
+    }
+
+    private void add() {
+        if(validate()) {
+            showProgressBar(true);
+            Board newBoard = createBoardFromDetails();
+
+            newBoard.setUser(User.getInstance().getEmail());
+            Model.instance.saveImage(imageBitmap, newBoard.getName() + ".jpg", imageCat, url -> {
+                newBoard.setImageUrl(url);
+                Model.instance.addBoard(newBoard, () -> {
+                    Navigation.findNavController(boardName).navigateUp();
+                });
             });
-        });
+        }
+    }
+
+    private void editBoard() {
+        if(validate()){
+            showProgressBar(true);
+            Board board = createBoardFromDetails();
+            Fragment thisFragment = this;
+            Model.instance.editBoard(board, new Model.CompleteListener() {
+                @Override
+                public void onComplete() {
+                    Toast.makeText(getActivity(), "Board Updated!", Toast.LENGTH_LONG).show();
+                    NavHostFragment.findNavController(thisFragment).popBackStack();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (isEditMode) {
+            addBoard.setText("Edit Board");
+            MainFeedActivity activity = (MainFeedActivity) getActivity();
+            activity.toolbar.setTitle(R.string.edit_board_title);
+            deleteBoard.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (isEditMode) {
+            menu.findItem(R.id.menuProfileFragment).setVisible(false);
+        }
     }
 }

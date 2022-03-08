@@ -17,7 +17,7 @@ public interface BoardDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Board... boards);
 
-    @Delete
-    void delete(Board board);
+    @Query("DELETE FROM Board WHERE boardID = :boardId")
+    void deleteBoardById(String boardId);
 
 }

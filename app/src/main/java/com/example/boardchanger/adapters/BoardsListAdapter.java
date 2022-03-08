@@ -19,6 +19,11 @@ import java.util.List;
 public class BoardsListAdapter extends RecyclerView.Adapter<BoardsListAdapter.MyViewHolder> {
     private LiveData<List<Board>> boards;
     private OnItemClickListener listener;
+    private Boolean editMode = false;
+
+    public void setEditMode(Boolean editMode) {
+        this.editMode = editMode;
+    }
 
     public BoardsListAdapter(LiveData<List<Board>> boards) {
         this.boards = boards;
@@ -31,6 +36,10 @@ public class BoardsListAdapter extends RecyclerView.Adapter<BoardsListAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row, parent, false);
+        TextView editWatermark = view.findViewById(R.id.list_row_edit_watermark);
+        if(!editMode) {
+            editWatermark.setVisibility(View.GONE);
+        }
         return new MyViewHolder(view, listener);
     }
 

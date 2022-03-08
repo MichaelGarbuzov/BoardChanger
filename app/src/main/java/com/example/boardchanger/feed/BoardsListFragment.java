@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.boardchanger.R;
 import com.example.boardchanger.adapters.BoardsListAdapter;
@@ -35,6 +36,7 @@ public class BoardsListFragment extends Fragment {
     SwipeRefreshLayout swipeRefresh;
     Boolean isOnlyUserBoards = false;
     ImageButton add;
+
 
     public BoardsListFragment() {
     }
@@ -63,6 +65,7 @@ public class BoardsListFragment extends Fragment {
         viewModel.setIsUserBoardsOnly(isOnlyUserBoards);
         adapter = new BoardsListAdapter(viewModel.getData());
         boardsList.setAdapter(adapter);
+        adapter.setEditMode(isOnlyUserBoards);
 
         adapter.setOnItemClickListener((v, position) -> {
             if(isOnlyUserBoards) {

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.boardchanger.auth.LoginActivity;
 import com.example.boardchanger.feed.MainFeedActivity;
+import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.users.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class IntroActivity extends AppCompatActivity {
@@ -43,9 +45,15 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(FirebaseAuth.getInstance().getCurrentUser()!= null){
-                    Intent intent = new Intent(IntroActivity.this, MainFeedActivity.class);
-                    startActivity(intent);
-                    finish();
+
+                    Model.instance.getUserByEmail(new Model.getUserByEmail() {
+                        @Override
+                        public void onComplete(User user) {
+                            Intent intent = new Intent(IntroActivity.this, MainFeedActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
                 }else {
                     Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
                     startActivity(intent);

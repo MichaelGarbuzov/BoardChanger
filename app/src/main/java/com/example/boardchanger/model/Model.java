@@ -2,6 +2,8 @@ package com.example.boardchanger.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.os.Handler;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,6 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.boardchanger.MyApplication;
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.users.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +24,26 @@ public class Model {
     Executor executor =Executors.newFixedThreadPool(1);
     ModelFirebase modelFirebase = new ModelFirebase();
     private Model(){
+    }
+
+    public void editBoard(Board board, CompleteListener listener) {
+        modelFirebase.editBoard(board, listener);
+    }
+
+    public void deleteBoard(Board board, CompleteListener listener) {
+        modelFirebase.deleteBoard(board, new CompleteListener() {
+            @Override
+            public void onComplete() {
+                executor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        BoardChangerLocalDB.db.boardDao().deleteBoardById(board.getId());
+                        listener.onComplete();
+                    }
+                });
+                //TODO Notify Data Change
+            }
+        });
     }
 
     public interface SaveImageListener{

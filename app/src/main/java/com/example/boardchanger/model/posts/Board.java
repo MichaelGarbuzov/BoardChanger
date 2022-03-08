@@ -77,7 +77,7 @@ public class Board {
         board.setUpdateDate(updateDate);
         board.setImageUrl(imageUrl);
         board.setUser(json.get("usersEmail").toString());
-        board.boardID = boardID;
+        board.setBoardID(boardID);
         return board;
     }
 
@@ -99,6 +99,10 @@ public class Board {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public void setBoardID(String id) {
+        this.boardID = id;
     }
 
 

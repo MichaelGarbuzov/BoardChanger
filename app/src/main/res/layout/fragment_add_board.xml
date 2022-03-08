@@ -180,5 +180,14 @@
         app:layout_constraintStart_toEndOf="@+id/add_board_image_preview"
         app:layout_constraintTop_toTopOf="@+id/add_board_image_preview" />
 
+    <Button
+        android:id="@+id/edit_board_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/delete_EB"
+        app:layout_constraintBottom_toBottomOf="@+id/add_board_add_board_btn"
+        app:layout_constraintStart_toEndOf="@+id/add_board_add_board_btn" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

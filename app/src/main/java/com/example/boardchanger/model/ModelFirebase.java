@@ -2,8 +2,11 @@ package com.example.boardchanger.model;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
+import android.window.SplashScreen;
+import android.window.SplashScreenView;
 
 import androidx.annotation.NonNull;
 
@@ -37,11 +40,35 @@ public class ModelFirebase {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseAuth userAuth = FirebaseAuth.getInstance();
     FirebaseUser user = userAuth.getCurrentUser();
+    DatabaseReference boardRef = FirebaseDatabase.getInstance().getReference().child("boards");
 
     public ModelFirebase() {
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(false).build();
         db.setFirestoreSettings(settings);
+    }
+
+    public void editBoard(Board board, Model.CompleteListener listener) {
+        DocumentReference boardRef = db.collection(Board.COLLECTION_NAME).document(board.getId());
+        boardRef.update(board.toJson()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    listener.onComplete();
+                }
+            }
+        });
+    }
+
+    public void deleteBoard(Board board, Model.CompleteListener listener) {
+        db.collection(Board.COLLECTION_NAME).document(board.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    listener.onComplete();
+                }
+            }
+        });
     }
 
     public interface GetAllBoardsListener {
@@ -76,7 +103,7 @@ public class ModelFirebase {
     }
 
     public void getBoardByID(String boardID, Model.getBoardByID listener) {
-            db.collection(Board.COLLECTION_NAME).document(boardID).get()
+        db.collection(Board.COLLECTION_NAME).document(boardID).get()
                 .addOnCompleteListener(task -> {
                     Board board = null;
                     if (task.isSuccessful() & task.getResult() != null) {
@@ -88,7 +115,7 @@ public class ModelFirebase {
 
     }
 
-    public void saveImage(Bitmap imageBitmap, String imageName,String imageCat, Model.SaveImageListener listener) {
+    public void saveImage(Bitmap imageBitmap, String imageName, String imageCat, Model.SaveImageListener listener) {
 
         StorageReference storageRef = storage.getReference();
 
@@ -140,8 +167,8 @@ public class ModelFirebase {
         String oldPass = User.getInstance().getPassword();
         AuthCredential credential = EmailAuthProvider.getCredential(email, oldPass);
         authenticateUser(credential, () -> user.updatePassword(userMap.get("password").toString()).addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                if(imageBitMap != null) {
+            if (task.isSuccessful()) {
+                if (imageBitMap != null) {
                     saveImage(imageBitMap, userMap.get("name") + ".jpg", "/user_pictures/", url -> {
                         userMap.put("imageUrl", url);
                         userRef.update(userMap).addOnCompleteListener(task1 -> listener.onComplete());
@@ -156,11 +183,12 @@ public class ModelFirebase {
     private interface AuthenticateUserListener {
         void onSuccess();
     }
+
     private void authenticateUser(AuthCredential credential, AuthenticateUserListener listener) {
         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     listener.onSuccess();
                 }
             }
