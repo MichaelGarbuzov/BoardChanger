@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -133,6 +134,7 @@ public class AddBoardFragment extends Fragment {
                         thisFrag.getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Model.instance.refreshBoardsList();
                                 showProgressBar(false);
                                 NavHostFragment.findNavController(thisFrag).navigateUp();
                             }
@@ -222,6 +224,7 @@ public class AddBoardFragment extends Fragment {
             Model.instance.saveImage(imageBitmap, newBoard.getName() + ".jpg", imageCat, url -> {
                 newBoard.setImageUrl(url);
                 Model.instance.addBoard(newBoard, () -> {
+                    Model.instance.refreshBoardsList();
                     Navigation.findNavController(boardName).navigateUp();
                 });
             });
@@ -237,6 +240,7 @@ public class AddBoardFragment extends Fragment {
                 @Override
                 public void onComplete() {
                     Toast.makeText(getActivity(), "Board Updated!", Toast.LENGTH_LONG).show();
+                    Model.instance.refreshBoardsList();
                     NavHostFragment.findNavController(thisFragment).popBackStack();
                 }
             });

@@ -13,32 +13,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardsListViewModel extends ViewModel {
+
     LiveData<List<Board>> data;
+    private Boolean isUserBoardsOnly;
+    private LiveData<List<Board>> boardsList;
 
     public BoardsListViewModel(){
         data = Model.instance.getAllBoards();
+
+        boardsList = Transformations.map(data, boards -> {
+            if(isUserBoardsOnly) {
+                List<Board> onlyUserBoard = new ArrayList<>();
+                for (Board board : boards) {
+                    if (board.getUser().equals(User.getInstance().getEmail())) {
+                        onlyUserBoard.add(board);
+                    }
+                }
+                return onlyUserBoard;
+            } else {
+                return boards;
+            }
+        });
     }
 
-    private Boolean isUserBoardsOnly;
-    private MutableLiveData<List<Board>> boardsList = new MutableLiveData();
 
     public LiveData<List<Board>> getData() {
-
-        if(isUserBoardsOnly) {
-            List<Board> boards = data.getValue();
-            List<Board> onlyUserBoard = new ArrayList<>();
-
-            for(Board board : boards) {
-                if (board.getUser().equals(User.getInstance().getEmail())) {
-                    onlyUserBoard.add(board);
-                }
-            }
-
-            boardsList.postValue(onlyUserBoard);
-            return boardsList;
-        }
-
-        return data;
+        return boardsList;
     }
 
     public void setIsUserBoardsOnly(Boolean isUserBoardsOnly) {

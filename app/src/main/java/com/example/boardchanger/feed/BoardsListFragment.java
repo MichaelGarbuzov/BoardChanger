@@ -30,16 +30,17 @@ import com.example.boardchanger.model.Model;
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.posts.BoardsListViewModel;
 
+import java.util.List;
+
 public class BoardsListFragment extends Fragment {
+
     BoardsListViewModel viewModel;
     BoardsListAdapter adapter;
     SwipeRefreshLayout swipeRefresh;
     Boolean isOnlyUserBoards = false;
     ImageButton add;
 
-
-    public BoardsListFragment() {
-    }
+    public BoardsListFragment() { }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -63,7 +64,7 @@ public class BoardsListFragment extends Fragment {
 
         isOnlyUserBoards = BoardsListFragmentArgs.fromBundle(getArguments()).getOnlyUserBoard();
         viewModel.setIsUserBoardsOnly(isOnlyUserBoards);
-        adapter = new BoardsListAdapter(viewModel.getData());
+        adapter = new BoardsListAdapter();
         boardsList.setAdapter(adapter);
         adapter.setEditMode(isOnlyUserBoards);
 
@@ -83,7 +84,7 @@ public class BoardsListFragment extends Fragment {
         add.setOnClickListener(Navigation.createNavigateOnClickListener(
                 BoardsListFragmentDirections.actionBoardsListFragmentToAddBoardFragment(null)));
 
-        viewModel.getData().observe(getViewLifecycleOwner(), boardList -> refresh());
+        viewModel.getData().observe(getViewLifecycleOwner(), boardList -> refreshWithBoards(boardList));
         swipeRefresh.setRefreshing(Model.instance.getBoardListLoadingState().getValue() ==
                 Model.BoardListLoadingState.loading);
         Model.instance.getBoardListLoadingState().observe(getViewLifecycleOwner(), boardListLoadingState -> {
@@ -118,5 +119,9 @@ public class BoardsListFragment extends Fragment {
     private void refresh() {
         adapter.notifyDataSetChanged();
         swipeRefresh.setRefreshing(false);
+    }
+
+    private void refreshWithBoards(List<Board> boards) {
+        adapter.updateBoards(boards);
     }
 }

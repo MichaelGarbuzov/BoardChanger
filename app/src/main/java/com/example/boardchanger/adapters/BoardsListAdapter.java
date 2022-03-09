@@ -14,10 +14,11 @@ import com.example.boardchanger.R;
 import com.example.boardchanger.model.posts.Board;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardsListAdapter extends RecyclerView.Adapter<BoardsListAdapter.MyViewHolder> {
-    private LiveData<List<Board>> boards;
+    private List<Board> boards = new ArrayList<>();
     private OnItemClickListener listener;
     private Boolean editMode = false;
 
@@ -25,9 +26,7 @@ public class BoardsListAdapter extends RecyclerView.Adapter<BoardsListAdapter.My
         this.editMode = editMode;
     }
 
-    public BoardsListAdapter(LiveData<List<Board>> boards) {
-        this.boards = boards;
-    }
+    public BoardsListAdapter() { }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
@@ -45,16 +44,22 @@ public class BoardsListAdapter extends RecyclerView.Adapter<BoardsListAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Board board = boards.getValue().get(position);
+        Board board = boards.get(position);
         holder.bind(board);
+    }
+
+    public void updateBoards(List<Board> boards) {
+        this.boards.clear();
+        this.boards = boards;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        if (boards.getValue() == null) {
+        if (boards == null) {
             return 0;
         }
-        return boards.getValue().size();
+        return boards.size();
     }
 
 
