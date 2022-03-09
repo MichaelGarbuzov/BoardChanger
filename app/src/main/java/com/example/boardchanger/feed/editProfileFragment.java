@@ -145,6 +145,11 @@ public class editProfileFragment extends Fragment {
                 Model.instance.getUserByEmail(user -> { });
                 NavHostFragment.findNavController(thisFragment).popBackStack();
             }
+
+            @Override
+            public void onError() {
+                Toast.makeText(getActivity(),"Failed to update User", Toast.LENGTH_LONG).show();
+            }
         });
     }
 }

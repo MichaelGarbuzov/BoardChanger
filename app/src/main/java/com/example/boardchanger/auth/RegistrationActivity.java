@@ -88,11 +88,9 @@ public class RegistrationActivity extends AppCompatActivity {
             startActivityForResult(intent,REQUEST_IMAGE_SELECTION);
         });
 
-        regBtn.setOnClickListener(new View.OnClickListener()
-
-        {
+        regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
+            public void onClick(View v) {
                 regBtn.setEnabled(false);
                 String email = regEmail.getText().toString().trim();
                 String password = regPwd.getText().toString().trim();
@@ -132,23 +130,30 @@ public class RegistrationActivity extends AppCompatActivity {
                             userName = regName.getText().toString();
                             userPassword = regPwd.getText().toString();
                             User.getInstance().setUserDetails(userEmail, userName, userPassword);
-                            if(imageBitmap != null){
-                            Model.instance.saveImage(imageBitmap, name + ".jpg",imageCat, url -> {
-                                User.getInstance().setImageUrl(url);
-                                    });}
-                                Model.instance.addUser(User.getInstance(), () -> {
+                            if (imageBitmap != null) {
+                                Model.instance.saveImage(imageBitmap, name + ".jpg", imageCat, url -> {
+                                    User.getInstance().setImageUrl(url);
+                                });
+                            }
+                            Model.instance.addUser(User.getInstance(), new Model.CompleteListener() {
+                                @Override
+                                public void onError() {
+                                    Toast.makeText(RegistrationActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onComplete() {
                                     Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                     Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
                                     startActivity(feed);
                                     finish();
-                                });
+                                }
+                            });
 
                             Intent feed = new Intent(RegistrationActivity.this, MainFeedActivity.class);
                             startActivity(feed);
                             finish();
-                        } else {
-                            Toast.makeText(RegistrationActivity.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });

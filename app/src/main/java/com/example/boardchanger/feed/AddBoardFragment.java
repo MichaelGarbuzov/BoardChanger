@@ -140,6 +140,10 @@ public class AddBoardFragment extends Fragment {
                             }
                         });
                     }
+                    @Override
+                    public void onError() {
+                        Toast.makeText(getActivity(),"Failed to delete board",Toast.LENGTH_LONG).show();
+                    }
                 });
             }
         });
@@ -242,6 +246,11 @@ public class AddBoardFragment extends Fragment {
                     Toast.makeText(getActivity(), "Board Updated!", Toast.LENGTH_LONG).show();
                     Model.instance.refreshBoardsList();
                     NavHostFragment.findNavController(thisFragment).popBackStack();
+                }
+
+                @Override
+                public void onError() {
+                    Toast.makeText(getActivity(),"Failed to update Board",Toast.LENGTH_LONG).show();
                 }
             });
         }

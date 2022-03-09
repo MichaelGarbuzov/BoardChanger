@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
+import android.widget.Toast;
 import android.window.SplashScreen;
 import android.window.SplashScreenView;
 
@@ -57,8 +58,10 @@ public class ModelFirebase {
                     listener.onComplete();
                 }
             }
+
         });
     }
+
 
     public void deleteBoard(Board board, Model.CompleteListener listener) {
         db.collection(Board.COLLECTION_NAME).document(board.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -67,6 +70,7 @@ public class ModelFirebase {
                 if (task.isSuccessful()) {
                     listener.onComplete();
                 }
+                else{listener.onError();}
             }
         });
     }
@@ -135,6 +139,7 @@ public class ModelFirebase {
             });
 
         });
+
     }
 
 

@@ -42,7 +42,11 @@ public class Model {
                         listener.onComplete();
                     }
                 });
-                //TODO Notify Data Change
+
+            }
+            @Override
+            public void onError() {
+                listener.onError();
             }
         });
     }
@@ -127,6 +131,8 @@ public class Model {
     }
 
     public interface CompleteListener {
+        void onError();
+
         void onComplete();
     }
 
@@ -144,6 +150,11 @@ public class Model {
             @Override
             public void onComplete() {
                 listener.onComplete();
+            }
+
+            @Override
+            public void onError() {
+                listener.onError();
             }
         });
     }
