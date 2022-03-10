@@ -16,7 +16,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="160dp"
         android:layout_margin="3dp"
         android:background="@color/transparent"
         android:padding="8dp">
@@ -70,7 +70,7 @@
             android:id="@+id/listrow_board_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="2dp"
             android:text="@string/name_LR"
             android:textColor="@color/black"
