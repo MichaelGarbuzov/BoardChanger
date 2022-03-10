@@ -14,6 +14,5 @@ Developed by [Michael Garbuzov](https://www.linkedin.com/in/michaelgarbuzov/), a
 
 # Images
 ### intro Page:
-<img width="194" alt="intro" src="https://user-images.githubusercontent.com/48695785/157645642-7a0f95c9-90c1-42c8-a644-ff7dfdeee0a7.png">
 
 
