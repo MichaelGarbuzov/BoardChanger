@@ -22,16 +22,20 @@ Developed by [Michael Garbuzov](https://www.linkedin.com/in/michaelgarbuzov/), a
 
 # Images
 ### intro Page:
-<img width="255" alt="intro" src="https://user-images.githubusercontent.com/48695785/158196612-020e27d9-0890-4a69-9b45-46a10c8556ab.png">
+<img width="193" alt="intro" src="https://user-images.githubusercontent.com/48695785/158203312-4822af3c-a65a-4503-a791-409e91def2cb.png">
+
 
 ### registration page:
-<img width="226" alt="register" src="https://user-images.githubusercontent.com/48695785/158196909-369aa992-50aa-4398-97a5-c0cf24caddb7.png">
+<img width="175" alt="register" src="https://user-images.githubusercontent.com/48695785/158201329-26386eb0-0e84-49bc-9de6-d2f0c375d5f9.png">
+
 
 ### Main feed page:
-<img width="215" alt="mainFeed" src="https://user-images.githubusercontent.com/48695785/158197005-83dfa7bd-501a-4957-a9d5-1d34ed3cbed1.png">
+<img width="176" alt="mainFeed" src="https://user-images.githubusercontent.com/48695785/158201355-a7b0cbc8-35f9-4b7a-a484-25b5c3944603.png">
+
 
 ### Add board page:
-<img width="209" alt="AddBoard" src="https://user-images.githubusercontent.com/48695785/158197150-9c985bd1-8be0-42d6-a436-5e4bc2681200.png">
+<img width="170" alt="AddBoard" src="https://user-images.githubusercontent.com/48695785/158201378-815e3993-c289-4a83-b44a-fb82821c2b51.png">
+
 
 # License
  ● No commercial use.
