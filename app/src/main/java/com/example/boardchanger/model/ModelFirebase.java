@@ -86,7 +86,7 @@ public class ModelFirebase {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     Board board = Board.create(doc.getData());
-                    if (board != null) {
+                    if (board != null && board.getDeleted() == false) {
                         list.add(board);
                     }
                 }

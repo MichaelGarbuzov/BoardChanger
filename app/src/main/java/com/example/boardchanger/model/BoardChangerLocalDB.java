@@ -10,10 +10,9 @@ import com.example.boardchanger.model.posts.BoardDao;
 import com.example.boardchanger.model.users.User;
 import com.example.boardchanger.model.users.UserDao;
 
-@Database(entities = {Board.class, User.class}, version = 8)
+@Database(entities = {Board.class, User.class}, version = 9)
 abstract class BoardChangerDBRepository extends RoomDatabase{
     public abstract BoardDao boardDao();
-    public abstract UserDao userDao();
 }
 
 public class BoardChangerLocalDB{

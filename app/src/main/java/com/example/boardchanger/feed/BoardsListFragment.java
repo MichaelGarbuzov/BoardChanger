@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.boardchanger.R;
 import com.example.boardchanger.adapters.BoardsListAdapter;
@@ -39,6 +40,7 @@ public class BoardsListFragment extends Fragment {
     SwipeRefreshLayout swipeRefresh;
     Boolean isOnlyUserBoards = false;
     ImageButton add;
+
 
     public BoardsListFragment() { }
 
@@ -75,6 +77,10 @@ public class BoardsListFragment extends Fragment {
                         BoardsListFragmentDirections.actionBoardsListFragmentToEditBoardFragment(boardID));
             } else {
                 String boardID = viewModel.getData().getValue().get(position).getId();
+                if(boardID == null){
+                    Toast.makeText(getActivity(), "Post was Deleted, Refreshing", Toast.LENGTH_LONG).show();
+                    Model.instance.refreshBoardsList();
+                }
                 Navigation.findNavController(v).navigate(
                         BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardID));
             }

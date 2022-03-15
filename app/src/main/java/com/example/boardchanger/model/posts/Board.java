@@ -28,8 +28,14 @@ public class Board {
     String imageUrl;
     static String phoneNum;
     Long updateDate = new Long(0);
+    Boolean isDeleted = false;
 
-
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
     public static String getPhoneNum() {
         return phoneNum;
     }

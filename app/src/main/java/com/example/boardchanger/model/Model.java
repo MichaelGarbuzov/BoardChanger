@@ -38,6 +38,7 @@ public class Model {
                 executor.execute(new Runnable() {
                     @Override
                     public void run() {
+                        board.setDeleted(true);
                         BoardChangerLocalDB.db.boardDao().deleteBoardById(board.getId());
                         listener.onComplete();
                     }
