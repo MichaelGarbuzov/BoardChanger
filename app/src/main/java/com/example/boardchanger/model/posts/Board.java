@@ -1,5 +1,7 @@
 package com.example.boardchanger.model.posts;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -145,6 +147,7 @@ public class Board {
         json.put("imageUrl", imageUrl);
         json.put("phoneNum", phoneNum);
         json.put("usersEmail", usersEmail);
+        json.put("isDeleted", isDeleted);
         return json;
     }
 

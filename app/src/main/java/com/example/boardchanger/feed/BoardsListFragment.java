@@ -76,11 +76,12 @@ public class BoardsListFragment extends Fragment {
                 Navigation.findNavController(v).navigate(
                         BoardsListFragmentDirections.actionBoardsListFragmentToEditBoardFragment(boardID));
             } else {
-                String boardID = viewModel.getData().getValue().get(position).getId();
-                if(boardID == null){
+               Boolean deleted = viewModel.getData().getValue().get(position).getDeleted();
+                if(deleted){
                     Toast.makeText(getActivity(), "Post was Deleted, Refreshing", Toast.LENGTH_LONG).show();
                     Model.instance.refreshBoardsList();
                 }
+                String boardID = viewModel.getData().getValue().get(position).getId();
                 Navigation.findNavController(v).navigate(
                         BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardID));
             }
@@ -130,4 +131,11 @@ public class BoardsListFragment extends Fragment {
     private void refreshWithBoards(List<Board> boards) {
         adapter.updateBoards(boards);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Model.instance.refreshBoardsList();
+    }
 }
+
