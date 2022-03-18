@@ -76,7 +76,7 @@ public class BoardsListFragment extends Fragment {
                 Navigation.findNavController(v).navigate(
                         BoardsListFragmentDirections.actionBoardsListFragmentToEditBoardFragment(boardID));
             } else {
-               Boolean deleted = viewModel.getData().getValue().get(position).getDeleted();
+               Boolean deleted = viewModel.getData().getValue().get(position).isDeleted;
                 if(deleted){
                     Toast.makeText(getActivity(), "Post was Deleted, Refreshing", Toast.LENGTH_LONG).show();
                     Model.instance.refreshBoardsList();

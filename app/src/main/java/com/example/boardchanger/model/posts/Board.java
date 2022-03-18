@@ -30,7 +30,7 @@ public class Board {
     String imageUrl;
     static String phoneNum;
     Long updateDate = new Long(0);
-    Boolean isDeleted = false;
+    public Boolean isDeleted = false;
 
     public Boolean getDeleted() {
         return isDeleted;
@@ -80,12 +80,14 @@ public class Board {
         Long updateDate = ts.getSeconds();
         String imageUrl = (String) json.get("imageUrl");
         String phoneNum = (String) json.get("phoneNum");
+        Boolean isDeleted = (Boolean) json.get("isDeleted");
         Board board = new Board(name, year, price, description, address);
         board.setPhoneNum(phoneNum);
         board.setUpdateDate(updateDate);
         board.setImageUrl(imageUrl);
         board.setUser(json.get("usersEmail").toString());
         board.setBoardID(boardID);
+        board.setDeleted(isDeleted);
         return board;
     }
 

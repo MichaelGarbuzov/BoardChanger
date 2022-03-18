@@ -45,6 +45,7 @@ public class Model {
                 });
 
             }
+
             @Override
             public void onError() {
                 listener.onError();
@@ -96,6 +97,7 @@ public class Model {
                                 lud = board.getUpdateDate();
                             }
                         }
+
                         MyApplication.getContext().getSharedPreferences("TAG", Context.MODE_PRIVATE)
                                 .edit().putLong("BoardsLastUpdateDate", lud).commit();
 

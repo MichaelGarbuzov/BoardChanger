@@ -64,7 +64,7 @@ public class ModelFirebase {
 
 
     public void deleteBoard(Board board, Model.CompleteListener listener) {
-        db.collection(Board.COLLECTION_NAME).document(board.getId()).update("isDeleted","true")
+        db.collection(Board.COLLECTION_NAME).document(board.getId()).update("isDeleted",true)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -87,7 +87,7 @@ public class ModelFirebase {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     Board board = Board.create(doc.getData());
-                    if (board != null && board.getDeleted() == false) {
+                    if (board != null && board.isDeleted == false) {
                         list.add(board);
                     }
                 }
