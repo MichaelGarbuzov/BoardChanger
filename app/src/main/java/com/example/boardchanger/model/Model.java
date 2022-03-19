@@ -101,8 +101,7 @@ public class Model {
                         MyApplication.getContext().getSharedPreferences("TAG", Context.MODE_PRIVATE)
                                 .edit().putLong("BoardsLastUpdateDate", lud).commit();
 
-                        List<Board> bdList = BoardChangerLocalDB.db.boardDao().getAll();
-                        boardsList.postValue(bdList);
+                        boardsList.postValue(list);
                         boardListLoadingState.postValue(BoardListLoadingState.loaded);
                     }
                 });

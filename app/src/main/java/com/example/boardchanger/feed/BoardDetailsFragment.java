@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.boardchanger.R;
 import com.example.boardchanger.model.posts.Board;
@@ -44,6 +45,10 @@ public class BoardDetailsFragment extends Fragment {
         Model.instance.getBoardByID(boardID, new Model.getBoardByID() {
             @Override
             public void onComplete(Board board) {
+                if(board.getDeleted()){
+                    Toast.makeText(getActivity(), "Post was Deleted, Refreshing", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(requireView()).popBackStack();
+                }
                 boardName.setText(board.getName());
                 boardYear.setText(board.getYear());
                 boardPrice.setText(board.getPrice());

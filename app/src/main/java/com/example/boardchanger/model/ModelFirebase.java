@@ -27,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -64,17 +65,19 @@ public class ModelFirebase {
 
 
     public void deleteBoard(Board board, Model.CompleteListener listener) {
-        db.collection(Board.COLLECTION_NAME).document(board.getId()).update("isDeleted",true)
+        db.collection(Board.COLLECTION_NAME).document(board.getId()).update("isDeleted", true)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    listener.onComplete();
-                }
-                else{listener.onError();}
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            listener.onComplete();
+                        } else {
+                            listener.onError();
+                        }
+                    }
+                });
     }
+
 
     public interface GetAllBoardsListener {
         void onComplete(List<Board> boardsList);

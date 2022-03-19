@@ -1,5 +1,7 @@
 package com.example.boardchanger.feed;
 
+import static com.example.boardchanger.model.BoardChangerLocalDB.db;
+
 import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
@@ -27,7 +29,9 @@ import android.widget.Toast;
 
 import com.example.boardchanger.R;
 import com.example.boardchanger.adapters.BoardsListAdapter;
+import com.example.boardchanger.model.BoardChangerLocalDB;
 import com.example.boardchanger.model.Model;
+import com.example.boardchanger.model.ModelFirebase;
 import com.example.boardchanger.model.posts.Board;
 import com.example.boardchanger.model.posts.BoardsListViewModel;
 
@@ -42,7 +46,8 @@ public class BoardsListFragment extends Fragment {
     ImageButton add;
 
 
-    public BoardsListFragment() { }
+    public BoardsListFragment() {
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -71,16 +76,11 @@ public class BoardsListFragment extends Fragment {
         adapter.setEditMode(isOnlyUserBoards);
 
         adapter.setOnItemClickListener((v, position) -> {
-            if(isOnlyUserBoards) {
+            if (isOnlyUserBoards) {
                 String boardID = viewModel.getData().getValue().get(position).getId();
                 Navigation.findNavController(v).navigate(
                         BoardsListFragmentDirections.actionBoardsListFragmentToEditBoardFragment(boardID));
             } else {
-               Boolean deleted = viewModel.getData().getValue().get(position).isDeleted;
-                if(deleted){
-                    Toast.makeText(getActivity(), "Post was Deleted, Refreshing", Toast.LENGTH_LONG).show();
-                    Model.instance.refreshBoardsList();
-                }
                 String boardID = viewModel.getData().getValue().get(position).getId();
                 Navigation.findNavController(v).navigate(
                         BoardsListFragmentDirections.actionBoardsListFragmentToBoardDetailsFragment(boardID));
@@ -108,7 +108,7 @@ public class BoardsListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(isOnlyUserBoards) {
+        if (isOnlyUserBoards) {
             add.setVisibility(View.GONE);
             MainFeedActivity activity = (MainFeedActivity) getActivity();
             activity.toolbar.setTitle(R.string.user_boards_title);
@@ -118,7 +118,7 @@ public class BoardsListFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        if(isOnlyUserBoards) {
+        if (isOnlyUserBoards) {
             menu.findItem(R.id.menuProfileFragment).setVisible(false);
         }
     }
