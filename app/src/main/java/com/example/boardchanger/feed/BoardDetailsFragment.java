@@ -45,8 +45,8 @@ public class BoardDetailsFragment extends Fragment {
         Model.instance.getBoardByID(boardID, new Model.getBoardByID() {
             @Override
             public void onComplete(Board board) {
-                if(board.getDeleted()){
-                    Toast.makeText(getActivity(), "Post was Deleted, Refreshing", Toast.LENGTH_LONG).show();
+                if (board.getDeleted()) {
+                    Toast.makeText(getContext(), "Post was Deleted, Refreshing", Toast.LENGTH_LONG).show();
                     Navigation.findNavController(requireView()).popBackStack();
                 }
                 boardName.setText(board.getName());
@@ -58,19 +58,19 @@ public class BoardDetailsFragment extends Fragment {
             }
         });
 
-         boardName = view.findViewById(R.id.board_details_name);
-         boardYear = view.findViewById(R.id.board_details_year);
-         boardPrice = view.findViewById(R.id.board_details_price);
-         boardDesc = view.findViewById(R.id.board_details_desc);
-         address = view.findViewById(R.id.board_details_address);
-         boardImage = view.findViewById(R.id.board_details_image);
-         callBtn = view.findViewById(R.id.board_details_call_btn);
+        boardName = view.findViewById(R.id.board_details_name);
+        boardYear = view.findViewById(R.id.board_details_year);
+        boardPrice = view.findViewById(R.id.board_details_price);
+        boardDesc = view.findViewById(R.id.board_details_desc);
+        address = view.findViewById(R.id.board_details_address);
+        boardImage = view.findViewById(R.id.board_details_image);
+        callBtn = view.findViewById(R.id.board_details_call_btn);
 
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+ Board.getPhoneNum()));
+                intent.setData(Uri.parse("tel:" + Board.getPhoneNum()));
                 startActivity(intent);
             }
         });
